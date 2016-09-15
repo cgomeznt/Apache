@@ -94,7 +94,7 @@ vemos el contenido. ::
 	-----END CERTIFICATE REQUEST-----
 
 
-Generamos la llave auto firmada (Self Singned Key)
+Generamos la llave auto firmada (Self Singned Key).::
 
 	# openssl x509 -req -days 180 -in ca.csr -signkey ca.key -out ca.crt
 	Signature ok
@@ -130,7 +130,7 @@ Vemos el contenido
 
 Copiamos los archivos a la localidad correcta.::
 
-	# cp ca.crt /etc/pki/tls/cert
+	# cp ca.crt /etc/pki/tls/certs
 	# cp ca.key /etc/pki/tls/private/
 	# cp ca.csr /etc/pki/tls/private/
 
@@ -140,11 +140,12 @@ Si los mueve, se debe indicar a SELinux el contexto de estos archivos, como la d
 
 	# restorecon -RvF /etc/pki
 
-Ahora debemos actualizar la configuracion de SSL de apache y buscamos las secciones de <VirtualHost _default_:443> y descomentamos con la modificacion que corresponda <ServerName www.ejemplo.com:443>
+Ahora debemos actualizar la configuracion de SSL de apache y buscamos las secciones de VirtualHost _default_:443 y descomentamos con la modificacion que corresponda (ServerName www.ejemplo.com:443)
  ::
 
 	# vi +/SSLCertificateFile /etc/httpd/conf.d/ssl.conf
 	SSLCertificateFile /etc/pki/tls/certs/ca.crt
+	SSLCertificateKeyFile /etc/pki/tls/private/ca.key
 	ServerName ejemplo.com:443
 
 Podemos buscar las siguientes tres lineas en /etc/httpd/conf.d/ssl.conf y las modificamos, pero asi solo tendriamos un certificado por IP, por tal motivo nos vamos al archivo de configuracion del VirtualHost y los agregamos ahi.::
