@@ -2,11 +2,11 @@ Virtual Host
 =============
 
 Virtual host es usuaro para correr mas de un dominio en una IP address. Es especialmente usuado para el publico que necesita correr varios sites en un virtual private server. El site mostrara diferente informacion a los visitadores, dependiendo de que site ingrese. No hay numero de virtual hosts.
-Creamos un directorio para almacenar el contenido de la pagina que servira el virtual host
+Creamos un directorio para almacenar el contenido de la pagina que servira el virtual host.::
 
 	# mkdir /var/www/html/public_html
 
-Debemos otorgar los permisos requeridos
+Debemos otorgar los permisos requeridos.::
 
 	# chown -R apache: /var/www/html/public_html/
 	# ls -l
@@ -18,7 +18,7 @@ Debemos otorgar los permisos requeridos
 	total 4
 	drwxr-xr-x. 2 apache apache 4096 ago 28 22:45 public_html
 
-Recuerda configurar los DNS para este site corresponda con la IP, para probar lo puedes crear en el /etc/hosts
+Recuerda configurar los DNS para este site corresponda con la IP, para probar lo puedes crear en el /etc/hosts.::
 
 	# vi /etc/hosts
 	192.168.1.4     www.public.com
@@ -35,7 +35,7 @@ Recuerda configurar los DNS para este site corresponda con la IP, para probar lo
 	rtt min/avg/max/mdev = 0.239/0.321/0.387/0.056 ms
 
 
-Creamos una pagina de prueba.:
+Creamos una pagina de prueba.::
 
 	# vi /var/www/html/public_html/index.html
 
@@ -48,6 +48,11 @@ Creamos una pagina de prueba.:
 	  </body>
 	</html>
 
+Pero antes debemos activar en NameVirtualHost *:80 en el http.conf.::
+
+	# vi /etc/httpd/confd/http.conf
+	NameVirtualHost *:80
+
 Crear Nuevos Archivos Virtual Host
 Los archivos Virtual Host son archivos que contienen información y configuración específica para el dominio y que le indican al servidor Apache como responden a las peticiones de varios dominios.
 
@@ -57,11 +62,9 @@ Iniciaremos con un dominio, configuralo, copialo para el segundo dominio, y desp
 
 En Centos los archivos de configuracion deben estar en "/etc/httpd/conf.d", esa directiva se esta en el archivo de configuracion /etc/httpd/conf/httpd.conf en Include conf.d/*.conf
 
-Creamos un archivo por cada virtual host
+Creamos un archivo por cada virtual host.::
 
 	# vi /etc/httpd/conf.d/public_html.conf
-
-	NameVirtualHost *:80
 	#
 	# NOTE: NameVirtualHost cannot be used without a port specifier
 	# (e.g. :80) if mod_ssl is being used, due to the nature of the
@@ -88,7 +91,7 @@ Reiniciamos el apache.::
 
 	# service httpd restart
 
-Probamos el nuevo virtual host
+Probamos el nuevo virtual host.::
 
 	# curl www.public.com
 	<html>
