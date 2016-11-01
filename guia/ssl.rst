@@ -47,6 +47,25 @@ Vemos el contenido.::
 	A8Gw3vLpLiyyepKJqEjZb4UT6ePO0OgxOoTKB9CT+2zSz8VRatUk
 	-----END RSA PRIVATE KEY-----
 
+Tambien pudieramos crear una clave privada RSA. Esta clave tendra es una clave de 1024 bits RSA que se cifra usando Triple-DES y se almacena en formato PEM de modo que sea legible como texto ASCII.::
+
+	# openssl genrsa -des3 -out CA.key 1024
+
+	Generating RSA private key, 1024 bit long modulus
+	.........................................................++++++
+	........++++++
+	e is 65537 (0x10001)
+	Enter PEM pass phrase:
+	Verifying password - Enter PEM pass phrase:
+
+Con la Key generada con clave, cada vez que inicie httpd nos pedira dicha clave.
+
+Si por alguna razon queremos remover la clave del key, tenemos que saber cual es la clave y hacer.::
+
+	# openssl rsa -in CA.key.org -out CA.key
+	Enter pass phrase for CA.key.org:
+	writing RSA key
+
 
 Generamos el Request CSR. ::
 
