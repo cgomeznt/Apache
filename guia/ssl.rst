@@ -159,7 +159,7 @@ Si los mueve, se debe indicar a SELinux el contexto de estos archivos, como la d
 
 	# restorecon -RvF /etc/pki
 
-Ahora debemos actualizar la configuracion de SSL de apache y buscamos las secciones de VirtualHost _default_:443 y descomentamos con la modificacion que corresponda (ServerName www.ejemplo.com:443)
+Ahora debemos actualizar la configuracion de SSL de apache y buscamos las secciones de VirtualHostdefault:443 y descomentamos con la modificacion que corresponda (ServerName www.ejemplo.com:443)
  ::
 
 	# vi +/SSLCertificateFile /etc/httpd/conf.d/ssl.conf

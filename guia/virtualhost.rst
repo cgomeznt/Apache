@@ -82,8 +82,8 @@ Creamos un archivo por cada virtual host.::
 		 DocumentRoot /var/www/html/public_html
 		 ServerName www.public.com
 		 ServerAlias public.com
-		 ErrorLog /var/www/html/public_html/error.log
-		 # CustomLog /var/www/html/public_html/requests.log
+		 ErrorLog logs/public_html_error.log
+		 CustomLog logs/public_html_requests.log common
 	</VirtualHost>
 
 

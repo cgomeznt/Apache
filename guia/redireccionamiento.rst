@@ -23,19 +23,19 @@ Ahora agregamos la configuración del redirect en el virtual host que lo requier
 	DocumentRoot /var/www/html/prueba
 	ServerName public.com
 	ServerAlias prueba.com
-	ErrorLog /var/www/html/prueba/error.log
-	# CustomLog /var/www/html/public_html/requests.log
+	ErrorLog logs/prueba_error.log
+	CustomLog logs/prueba_requests.log
 	Redirect 301 / https://github.com/cgomeznt
 	</VirtualHost>
 
 	<VirtualHost *:443>
 
 	ServerAdmin webmaster@example.com
-	DocumentRoot /var/www/html/prueba
+	DocumentRoot /var/www/html/public
 	ServerName public.com
-	ServerAlias prueba.com
-	ErrorLog /var/www/html/prueba/error.log
-	# CustomLog /var/www/html/public_html/requests.log
+	ServerAlias public.com
+	ErrorLog logs/public_error.log
+	CustomLog logs/public_requests.log
 	SSLEngine on
 	SSLCertificateFile /etc/pki/tls/certs/ca.crt
 	SSLCertificateKeyFile /etc/pki/tls/private/private.key
@@ -56,9 +56,12 @@ Indica que el recurso ha sido reemplazado por otro.
 402
 Indica que el recurso se ha eliminado de forma permanente. Cuando se utiliza este estado el argumento URL debe omitirse.
 
+Tambien puede hacer un Redirect permanent
+RedirectPermanent /welcome http://google.com
+
 Recargar la configuración de Apache.::
 
 # sudo service httpd reload
 
-
+Tabien
 
