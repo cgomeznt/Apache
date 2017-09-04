@@ -61,3 +61,18 @@ La directiva ProxyPreserveHost On permite que el salto del servidor de front-end
 Por último, las directivas ProxyPass y ProxyPassReverse gestionan el salto y la vuelta del servidor de front-end al de back-end.
 
 Habilitar el vhost y reiniciar el servicio
+
+Hacer un Proxy Pass en Cluster
+++++++++++++++++++++++++++++++
+
+::
+
+   ## The rest of the traffic goes to the default webservers
+   ## (load balanced cluster - equal traffic goes to "one" and "two")
+      <Proxy balancer://web_servers>
+        BalancerMember http://webserver_one.domain.lan 
+        BalancerMember http://webserver_two.domain.lan 
+      </Proxy>
+     ProxyPass / balancer://web_servers/
+     ProxyPassReverse / balancer://web_servers/
+  </VirtualHost>
