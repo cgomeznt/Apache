@@ -62,6 +62,28 @@ Por último, las directivas ProxyPass y ProxyPassReverse gestionan el salto y la
 
 Habilitar el vhost y reiniciar el servicio
 
+Este es un ejemplo cuando en el otro lado tiene certificado, debemos agregar SSLProxyEngine on::
+
+	<VirtualHost *:80>
+			 ServerAdmin webmaster@cursoinfraestructura.com.ve
+			 DocumentRoot /var/www/html/public_html
+			 ServerName www.cursoinfraestructura.com.ve
+			 ServerAlias cursoinfraestructura.com.ve
+			 ProxyRequests Off
+			 ProxyPreserveHost On
+			 ErrorLog logs/public_html_error.log
+			 CustomLog logs/public_html_requests.log common
+			 SSLProxyEngine on
+			 SSLProxyVerify none
+			 #SSLProxyCheckPeerCN off
+             #SSLProxyCheckPeerName off
+             #SSLProxyCheckPeerExpire off
+
+			 ProxyPass  /sample https://192.168.1.20/sample
+			 ProxyPassReverse /sample https://192.168.1.20/sample
+	</VirtualHost>
+
+
 Hacer un Proxy Pass en Cluster
 ++++++++++++++++++++++++++++++
 
