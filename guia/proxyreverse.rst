@@ -78,7 +78,6 @@ Este es un ejemplo cuando en el otro lado tiene certificado, debemos agregar SSL
 			 #SSLProxyCheckPeerCN off
              #SSLProxyCheckPeerName off
              #SSLProxyCheckPeerExpire off
-
 			 ProxyPass  /sample https://192.168.1.20/sample
 			 ProxyPassReverse /sample https://192.168.1.20/sample
 	</VirtualHost>
