@@ -8,6 +8,7 @@
 * [Debugging SSL con openssl](guia/debuggingssl.rst)
 * [Configurar Redireccionamiento](guia/redireccionamiento.rst)
 * [Configurar Proxy Inverso](guia/proxyreverse.rst)
+* [Algunos ejemplos de Virtual Host](guia/Ejemplos_VirtualHost.rst)
 * [Convertid formato rst to HTML](guia/rsttohtml.rst)
 
 
