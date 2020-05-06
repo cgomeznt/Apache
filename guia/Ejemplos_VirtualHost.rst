@@ -99,7 +99,7 @@ cat /etc/httpd/conf.d/102_vhost_controlFraude.conf
         ProxyPassReverse / http://localhost:15041/
 </VirtualHost>
 
-Ejemplo de un Vhost que Redirige las peticiones del puerto 443 http al 15041 para usar SSL en el mismo server, en este ejemplo es un Apache delante que redirecciona las peticiones a un Glassfish
+Ejemplo de un Vhost que Redirige las peticiones del puerto 443 http al 15041 para usar SSL en el mismo server, en este ejemplo es un Apache delante que redirecciona las peticiones a un Glassfish::
 
 cat /etc/httpd/conf.d/103_vhost_controlFraude.conf
 # Virtual Host - Redirige las peticiones del puerto 443 http al 1504 para usar SSL en el mismo serve
