@@ -60,7 +60,7 @@ Ejemplo de un Vhost que Redirige las peticiones del puerto 4848 http al 4849 par
 			ProxyPassReverse / http://localhost:4849/
 	</VirtualHost>
 
-Ejemplo de un Vhost que Redirige las peticiones del puerto 15040 http al 15041 para usar SSL en el mismo server, en este ejemplo es un Apache delante que redirecciona las peticiones a un Glassfish
+Ejemplo de un Vhost que Redirige las peticiones del puerto 15040 http al 15041 para usar SSL en el mismo server, en este ejemplo es un Apache delante que redirecciona las peticiones a un Glassfish::
 
 cat /etc/httpd/conf.d/102_vhost_controlFraude.conf
 # Virtual Host - Redirige las peticiones del puerto 15040 http al 15041 para usar SSL en el mismo server
