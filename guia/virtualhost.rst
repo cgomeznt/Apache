@@ -1,7 +1,7 @@
 Virtual Host
 =============
 
-Virtual host es usuaro para correr mas de un dominio en una IP address. Es especialmente usuado para el publico que necesita correr varios sites en un virtual private server. El site mostrara diferente informacion a los visitadores, dependiendo de que site ingrese. No hay numero de virtual hosts.
+Virtual host es para correr mas de un dominio en una IP address. Es especialmente usuado para el publico que necesita correr varios sites en un virtual private server. El site mostrara diferente informacion a los visitadores, dependiendo de que site ingrese. No hay numero de virtual hosts.
 Creamos un directorio para almacenar el contenido de la pagina que servira el virtual host.::
 
 	# mkdir /var/www/html/public_html
