@@ -11,5 +11,6 @@
 * [Configurar Proxy Inverso](guia/proxyreverse.rst)
 * [Algunos ejemplos de Virtual Host](guia/Ejemplos_VirtualHost.rst)
 * [Convertid formato rst to HTML](guia/rsttohtml.rst)
+* [Run Apache non-root](guia/non-root.rst)
 
 
