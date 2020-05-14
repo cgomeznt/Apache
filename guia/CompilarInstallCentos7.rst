@@ -5,6 +5,7 @@ Compilar Instalar Apache 2.4
 Apache httpd usa libtool y autoconf para crear un entorno de compilación que se parece a muchos otros proyectos de código abierto
 
 Se deben atender primero los requisitos indicados por Apache:
+
 	apr
 	apr-util
 	pcre
@@ -88,7 +89,7 @@ Declaracion de la variable que debe indicar en donde estan las Librerías::
 
 Instalamos y configuramos authbind::
 
-  sudo rpm -Uvh https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
+  sudo rpm -Uvh https://github.com/cgomeznt/Apache/tree/master/tools/authbind-2.1.1-0.1.x86_64.rpm
   touch /etc/authbind/byport/80
   chmod 500 /etc/authbind/byport/80
   chown tomcat /etc/authbind/byport/80
