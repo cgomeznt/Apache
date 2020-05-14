@@ -5,11 +5,10 @@ Compilar Instalar Apache 2.4
 Apache httpd usa libtool y autoconf para crear un entorno de compilación que se parece a muchos otros proyectos de código abierto
 
 Se deben atender primero los requisitos indicados por Apache:
-
-	apr
-	apr-util
-	pcre
-	pcre2
+* apr
+* apr-util
+* pcre
+* pcre2
 
 Descarga apr1.7.0 y apr-util1.6.0 desde  http://apr.apache.org/.
 
