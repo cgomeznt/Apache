@@ -2,6 +2,7 @@
 
 
 * [Instalar Apache en CentOS](guia/instalar.rst)
+* [Compilar Instalar Apache en CentOS 7](guia/CompilarInstallCentos7.rst)
 * [Configurar un virtualhost](guia/virtualhost.rst)
 * [Configurar SSL con openssl](guia/ssl.rst)
 * [Chequear el SSL con openssl](guia/chequearssl.rst)
