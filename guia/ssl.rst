@@ -63,6 +63,7 @@ Reiniciamos.::
 
 Existen muchas formas de verificar
 
+
 Antes de continuar el certificado tiene en sus alter name un DNS llamado : srvscmutils.fabric.local
 
 Verificamos el portal con el comando curl y veremos que nos indica que dicho portal no es seguro por no le indicamos cual es el certificado publico de la CA.::
