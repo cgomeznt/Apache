@@ -5,8 +5,6 @@
 * [Compilar Instalar Apache en CentOS 7](guia/CompilarInstallCentos7.rst)
 * [Configurar un virtualhost](guia/virtualhost.rst)
 * [Configurar SSL con openssl](guia/ssl.rst)
-* [Chequear el SSL con openssl](guia/chequearssl.rst)
-* [Debugging SSL con openssl](guia/debuggingssl.rst)
 * [Cipher recomendado para cumplir con PCI](guia/cipherrecomendado.rst)
 * [Configurar Redireccionamiento](guia/redireccionamiento.rst)
 * [Configurar Proxy Inverso](guia/proxyreverse.rst)
