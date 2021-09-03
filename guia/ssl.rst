@@ -5,173 +5,30 @@ Debemos tener instalado mod_ssl y openssl.::
 
 	# yum install mod_ssl openssl
 
-Creamos un certificado autofirmado.
---------------------------------------
 
-Generamos la private key. ::
+En este laboratorio se firmo el certificado utilizando una entidad certificadora, ver el siguiente link
 
-	# openssl genrsa -out ca.key 2048
-	Generating RSA private key, 2048 bit long modulus
-	.................+++
-	........................+++
-	e is 65537 (0x10001)
-
-Vemos el contenido.::
-
-	# cat ca.key 
-	-----BEGIN RSA PRIVATE KEY-----
-	MIIEowIBAAKCAQEA1H+sSZGtzGykLTszrn1vvpEaRHQIo6GVC8qnq1AvNYyGQDyG
-	P+RdSLZ9PpRP04AupcKbaA3tATxlynr6EEE4ZqgLFJ30YpI4qQNv0eRsevre5Wu/
-	c2VIDVk+xRvMFL8fnWTxtIH2JHMCpeV+4hdW3KAptEI9fb+jr1bvj0et+vjnd1br
-	JvZnQbB/07eg/bnRcpqzXoLnrU84YyY7mYmrOYCGeinvMi7jXUnl7KXaibb8xO5A
-	4frKfqkorMtSECWLXOwbmZ+YB/XDClhYCpbsUs1ZbOcdfuJbrrXQwvWzdd+sUXsw
-	H8FtucNt006xGGOaASlClWdTdBrfxYGWEABzSQIDAQABAoIBAAnLnNiDU5yhwWuo
-	V/iKJbWGIMzZAHDyiNlTTSlTd+mjAalCYPnfAAHTD7Dry0Y3mW7gqqNASRWOgC62
-	PoKzTvNEecZIhbRpgx0fYG8vdWSx3cZ7kgayu4CKBZ+2aVDngoCR36ZvezYw6wVU
-	r+WiJ8nhxCpgB0+dnuD9Q+u55SY1b3ZtBsrdKpLuC3YVkSDAksmqdIU5uERK2+pN
-	qiHpg+y8+s/zlW/L6fMAXaKXbEMmxQhNJg2wTXz5BJG+lbv767V8MUyk5eYBfXuH
-	jAzujFmMi044fohQBSB5jb0SulIqvL2yMfe1VjW5waam2R+Pl+Mov7tP9cUbJhPa
-	22NjrbUCgYEA/3scx63ZSE3h3GqYYlNIDvBSnzInWnAGUdbaD8gSibMjspk/Wl2G
-	UcSc8l/9BqRSomID+sf//WZRtI8Me7zPfDqKpcwGQzJ2yEG2FXRuaDcH4lnXvrG1
-	R7/FNYf51gEEm/33kQNJUDoM8kv3RAymsAL3GBUe6rNUpRge6uM//lMCgYEA1O40
-	Gn/7MA/Nwf2rTWIvs5MKHjMd0bVZ1L0kuuU9WhwbRuB1hbb4PvtfBW7pKGsGRqLL
-	OpcyCWgfu73kKsNkUkyBQYhDyFfLHqCMmirTlSINFTgxdO9dQf11HzPTfs+F0q70
-	RQpkzSjxFz8ZwRLLnu8knel4tEA6/E7n3AyLfHMCgYATjcCuJ8gxmIRo8l+nZuhk
-	/E/Wj2gjq99P9DnMa2u/zk41JTWMHQxixcGda2taTslkVEwprZUSN/qY7zntXo4i
-	2/gwqGTyT7J3sU/WZIruvweDc4zns4JEc5EMf9PHZVyM8+s21iGOWmMTSG0scCtx
-	3Ug8N6GeJQuddzMmly4WsQKBgB90JIw5lZBu9TUP1Ms0ktlTAi6d3GzK/j8XxaI6
-	FMsH1dutco7TDW64UTwLOzP2Q1IR4DWCeii7kdx424iZnmst0/YrO+APX/jhPIPV
-	ibXA9u/Igj3E0iDaYP+/9yEHZLxPjdPZCjToNFz7vEEyFpQevWj6QRNXXZ9BxKxT
-	yhMTAoGBAOZtx6UU/pF5XtuDOS6hqlL12HX1kCrqtom48+6FiFFEGs2fjjpuU/jW
-	YpwbeFJRD7Cn2iF9bipj58qim8CmCwXeoZ6E81BuqMWVwCpVUH65/zh5Dj3DR8dx
-	A8Gw3vLpLiyyepKJqEjZb4UT6ePO0OgxOoTKB9CT+2zSz8VRatUk
-	-----END RSA PRIVATE KEY-----
-
-Tambien pudieramos crear una clave privada RSA. Esta clave tendra es una clave de 1024 bits RSA que se cifra usando Triple-DES y se almacena en formato PEM de modo que sea legible como texto ASCII.::
-
-	# openssl genrsa -des3 -out CA.key 1024
-
-	Generating RSA private key, 1024 bit long modulus
-	.........................................................++++++
-	........++++++
-	e is 65537 (0x10001)
-	Enter PEM pass phrase:
-	Verifying password - Enter PEM pass phrase:
-
-Con la Key generada con clave, cada vez que inicie httpd nos pedira dicha clave.
-
-Si por alguna razon queremos remover la clave del key, tenemos que saber cual es la clave y hacer.::
-
-	# openssl rsa -in CA.key.org -out CA.key
-	Enter pass phrase for CA.key.org:
-	writing RSA key
+https://github.com/cgomeznt/Certificados/blob/master/guia/cacentos7.rst
 
 
-Generamos el Request CSR. ::
+Copiamos los archivos a la localidad correcta o donde el servicio Apache tenga permisos::
 
-	# openssl req -new -key ca.key -out ca.csr
-	You are about to be asked to enter information that will be incorporated
-	into your certificate request.
-	What you are about to enter is what is called a Distinguished Name or a DN.
-	There are quite a few fields but you can leave some blank
-	For some fields there will be a default value,
-	If you enter '.', the field will be left blank.
-	-----
-	Country Name (2 letter code) [XX]:VE
-	State or Province Name (full name) []:DC
-	Locality Name (eg, city) [Default City]:Caracas
-	Organization Name (eg, company) [Default Company Ltd]:Prueba
-	Organizational Unit Name (eg, section) []:Personal
-	Common Name (eg, your name or your server's hostname) []:srv-01
-	Email Address []:webmaster@dominio.local
-
-	Please enter the following 'extra' attributes
-	to be sent with your certificate request
-	A challenge password []:Venezuela21
-	An optional company name []:
-
-vemos el contenido. ::
-
-	# cat ca.csr 
-	-----BEGIN CERTIFICATE REQUEST-----
-	MIIC6zCCAdMCAQAwgYkxCzAJBgNVBAYTAlZFMQswCQYDVQQIDAJEQzEQMA4GA1UE
-	BwwHQ2FyYWNhczEPMA0GA1UECgwGUHJ1ZWJhMREwDwYDVQQLDAhQZXJzb25hbDEP
-	MA0GA1UEAwwGc3J2LTAxMSYwJAYJKoZIhvcNAQkBFhd3ZWJtYXN0ZXJAZG9taW5p
-	by5sb2NhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANR/rEmRrcxs
-	pC07M659b76RGkR0CKOhlQvKp6tQLzWMhkA8hj/kXUi2fT6UT9OALqXCm2gN7QE8
-	Zcp6+hBBOGaoCxSd9GKSOKkDb9HkbHr63uVrv3NlSA1ZPsUbzBS/H51k8bSB9iRz
-	AqXlfuIXVtygKbRCPX2/o69W749Hrfr453dW6yb2Z0Gwf9O3oP250XKas16C561P
-	OGMmO5mJqzmAhnop7zIu411J5eyl2om2/MTuQOH6yn6pKKzLUhAli1zsG5mfmAf1
-	wwpYWAqW7FLNWWznHX7iW6610ML1s3XfrFF7MB/BbbnDbdNOsRhjmgEpQpVnU3Qa
-	38WBlhAAc0kCAwEAAaAcMBoGCSqGSIb3DQEJBzENDAtWZW5lenVlbGEyMTANBgkq
-	hkiG9w0BAQUFAAOCAQEAFt1x8k45jUPsc2sf+M8g5IsCdwH2t2joZWmXXf5yz3My
-	0Qgosl0woYAkfmC495JVQifq1tQsIVxXfdGjTCY2j76X/63h9ekamGIomQw31MFo
-	yFEE2KUR3cmmLI2koJpK5Wi8jDt9rfqlH8myaY2IHX31rf80BKGfEDk8ZCPuTcgB
-	PJTshwUoKL0P6B1zrd5RT0QEm8QswpMgwd3nobaAisIoNPHw1evyR9i/oqV9i1ef
-	WShqrbo6yM7AnrcpTEIKeM8nyGW1jqSB9AEpeT7zxfUk160cIIgO5yGcBP4cxkF3
-	qjNyfLWSScTjHqcr2c2hGI2iCODKXg7ZntSkAJOs0w==
-	-----END CERTIFICATE REQUEST-----
+	# cp srvutils.crt /etc/pki/tls/certs
+	# cp srvutils.key /etc/pki/tls/private/
 
 
-Generamos la llave auto firmada (Self Singned Key).::
-
-	# openssl x509 -req -days 180 -in ca.csr -signkey ca.key -out ca.crt
-	Signature ok
-	subject=/C=VE/ST=DC/L=Caracas/O=Prueba/OU=Personal/CN=srv-01/emailAddress=webmaster@dominio.local
-	Getting Private key
-
-Vemos el contenido
-::
-
-	# cat ca.crt 
-	-----BEGIN CERTIFICATE-----
-	MIIDkDCCAngCCQDMe17znZTZ8jANBgkqhkiG9w0BAQUFADCBiTELMAkGA1UEBhMC
-	VkUxCzAJBgNVBAgMAkRDMRAwDgYDVQQHDAdDYXJhY2FzMQ8wDQYDVQQKDAZQcnVl
-	YmExETAPBgNVBAsMCFBlcnNvbmFsMQ8wDQYDVQQDDAZzcnYtMDExJjAkBgkqhkiG
-	9w0BCQEWF3dlYm1hc3RlckBkb21pbmlvLmxvY2FsMB4XDTE2MDgyOTAzNTE1OFoX
-	DTE3MDIyNTAzNTE1OFowgYkxCzAJBgNVBAYTAlZFMQswCQYDVQQIDAJEQzEQMA4G
-	A1UEBwwHQ2FyYWNhczEPMA0GA1UECgwGUHJ1ZWJhMREwDwYDVQQLDAhQZXJzb25h
-	bDEPMA0GA1UEAwwGc3J2LTAxMSYwJAYJKoZIhvcNAQkBFhd3ZWJtYXN0ZXJAZG9t
-	aW5pby5sb2NhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANR/rEmR
-	rcxspC07M659b76RGkR0CKOhlQvKp6tQLzWMhkA8hj/kXUi2fT6UT9OALqXCm2gN
-	7QE8Zcp6+hBBOGaoCxSd9GKSOKkDb9HkbHr63uVrv3NlSA1ZPsUbzBS/H51k8bSB
-	9iRzAqXlfuIXVtygKbRCPX2/o69W749Hrfr453dW6yb2Z0Gwf9O3oP250XKas16C
-	561POGMmO5mJqzmAhnop7zIu411J5eyl2om2/MTuQOH6yn6pKKzLUhAli1zsG5mf
-	mAf1wwpYWAqW7FLNWWznHX7iW6610ML1s3XfrFF7MB/BbbnDbdNOsRhjmgEpQpVn
-	U3Qa38WBlhAAc0kCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAFCYKCA9DT633sNIZ
-	Zlyn9fl7BXKohjYxIUumByaP6xcuO6iteLsd4nAwPBDQJlSEN8B72PD1i0Jo4xLY
-	03huQznR7rs8DXMfWgZtF8V/v3DOpo3z05tYLUk4u0I5TxgLL50ti09Q4d36bGyz
-	goVaSwfI1LfoSvz/U3tt+O/IeHXuO1q6fSzz9sfpVm/2ily1ISCgcGHoWoiIkDG1
-	8jKypWmWMLbLsgMKqLHywNFvOJ+cc6LC4v78EvrAt3nP+PQ5/XvN+HNF1ajzj+Cu
-	rt5nFj7tH+ducqbe3b0mHuuhTveinD+4DzL8inolqoKTbpp7nKu7JaVPh2tZCNga
-	yKOR1w==
-	-----END CERTIFICATE-----
-
-Copiamos los archivos a la localidad correcta.::
-
-	# cp ca.crt /etc/pki/tls/certs
-	# cp ca.key /etc/pki/tls/private/
-	# cp ca.csr /etc/pki/tls/private/
-
-	
-WARNING: No mueva los archivos esto por el SELinux. Apache se quejara porque los archivos estan perdidos, los archivos no tienen permisos en SELinux.
-Si los mueve, se debe indicar a SELinux el contexto de estos archivos, como la definicion correcta para /etc/pki/* qeu vien con la politica de SELinux.::
-
-	# restorecon -RvF /etc/pki
-
-Ahora debemos actualizar la configuracion de SSL de apache y buscamos las secciones de VirtualHostdefault:443 y descomentamos con la modificacion que corresponda (ServerName www.ejemplo.com:443)
+Ahora debemos actualizar la configuración de SSL de apache y buscamos las secciones de VirtualHostdefault:443 y descomentamos con la modificación que corresponda (ServerName www.srvutils.com:443)
  ::
 
 	# vi +/SSLCertificateFile /etc/httpd/conf.d/ssl.conf
-	SSLCertificateFile /etc/pki/tls/certs/ca.crt
-	SSLCertificateKeyFile /etc/pki/tls/private/ca.key
-	ServerName ejemplo.com:443
+	SSLCertificateFile /etc/pki/tls/certs/srvutils.crt
+	SSLCertificateKeyFile /etc/pki/tls/private/srvutils.key
+	ServerName ejemplo:443
 
-Podemos buscar las siguientes tres lineas en /etc/httpd/conf.d/ssl.conf y las modificamos, pero asi solo tendriamos un certificado por IP, por tal motivo nos vamos al archivo de configuracion del VirtualHost y los agregamos ahi.::
+Podemos buscar las siguientes tres lineas en /etc/httpd/conf.d/ssl.conf y las modificamos, pero así solo tendríamos un certificado por IP, por tal motivo nos vamos al archivo de configuración del VirtualHost y los agregamos ahí.::
 
 	# vi /etc/httpd/conf.d/ejemplo.com.conf
 
-	# NameVirtualHost *:443:
 	#
 	# NOTE: NameVirtualHost cannot be used without a port specifier
 	# (e.g. :80) if mod_ssl is being used, due to the nature of the
@@ -185,28 +42,32 @@ Podemos buscar las siguientes tres lineas en /etc/httpd/conf.d/ssl.conf y las mo
 	# server name.
 	#
 		    <VirtualHost *:443>
-		             ServerAdmin webmaster@example.com
+		             ServerAdmin webmaster@fabric.com
 		             DocumentRoot /var/www/html/ejemplo.com
-		             ServerName www.ejemplo.com
-		             ServerAlias ejemplo.com
+		             ServerName srvutils
+		             ServerAlias srvutils.com
 		             ErrorLog /var/www/html/ejemplo.com/error.log
-		             #CustomLog /var/www/html/ejemplo.com/requests.log
+		             CustomLog /var/www/html/ejemplo.com/requests.log common
 		             # RedirectPermanent /welcome http://google.com
 		             SSLEngine on
-		             SSLCertificateFile /etc/pki/tls/certs/ca.crt
-		             SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+		             SSLCertificateFile /etc/pki/tls/certs/srvutils.crt
+		             SSLCertificateKeyFile /etc/pki/tls/private/srvutils.key
 		    </VirtualHost>
 
 
 
-Verificamos la configuracion del apache y lo reiniciamos.::
+Reiniciamos.::
 
 	# service httpd configtest
 	# service httpd restart
 
-Verificamos el funcionamiento.::
+Existen muchas formas de verificar
 
-	# curl https://ejemplo.com
+Antes de continuar el certificado tiene en sus alter name un DNS llamado : srvscmutils.fabric.local
+
+Verificamos el portal con el comando curl y veremos que nos indica que dicho portal no es seguro por no le indicamos cual es el certificado publico de la CA.::
+
+	# curl https://srvscmutils.fabric.local
 	curl: (60) SSL certificate problem: self signed certificate
 	More details here: http://curl.haxx.se/docs/sslcerts.html
 
@@ -221,7 +82,9 @@ Verificamos el funcionamiento.::
 	If you'd like to turn off curl's verification of the certificate, use
 	 the -k (or --insecure) option.
 
-	# curl https://ejemplo.com -k
+Si le indicamos el curl el parametro **-k** pues va omitir el certificado y NO va establecer el canal SSL::
+	
+	# curl https://srvscmutils.fabric.local -k
 	<html>
 	  <head>
 		<title>www.ejemplo.com</title>
@@ -230,4 +93,99 @@ Verificamos el funcionamiento.::
 		<h1>Felicitaciones, se creo el Virtual Host de ejemplo.com</h1>
 	  </body>
 	</html>
+
+Pero si al comando curl le indicamos cual es el certificado publico de la CA, validara el certificado y establecerá un canal SSL::
+
+	# curl https://srvscmutils.fabric.local --cacert /opt/certificados/ca-fabric.crt 
+	<html>
+	  <head>
+		<title>www.ejemplo.com</title>
+	  </head>
+	  <body>
+		<h1>Felicitaciones, se creo el Virtual Host de ejemplo.com</h1>
+	  </body>
+	</html>
+
+Ahora con OpenSSl vamos a consultar el portal para culminar de certificar::
+
+	# openssl s_client -connect srvscmutils.fabric.local:443 -CAfile /opt/certificados/ca-fabric.crt
+
+	CONNECTED(00000003)
+	depth=1 C = VE, ST = DC, L = DC, O = Default Fabric ltd, OU = Support Criptography, CN = criptography, emailAddress = root@fabric.com
+	verify return:1
+	depth=0 C = VE, ST = DC, L = Caracas, O = PERSONAL, OU = TI, CN = srvutils
+	verify return:1
+	---
+	Certificate chain
+	 0 s:/C=VE/ST=DC/L=Caracas/O=PERSONAL/OU=TI/CN=srvutils
+	   i:/C=VE/ST=DC/L=DC/O=Default Fabric ltd/OU=Support Criptography/CN=criptography/emailAddress=root@fabric.com
+	---
+	Server certificate
+	-----BEGIN CERTIFICATE-----
+	MIID2jCCAsKgAwIBAgIJAJfaNaChMvstMA0GCSqGSIb3DQEBCwUAMIGaMQswCQYD
+	VQQGEwJWRTELMAkGA1UECAwCREMxCzAJBgNVBAcMAkRDMRswGQYDVQQKDBJEZWZh
+	dWx0IEZhYnJpYyBsdGQxHTAbBgNVBAsMFFN1cHBvcnQgQ3JpcHRvZ3JhcGh5MRUw
+	EwYDVQQDDAxjcmlwdG9ncmFwaHkxHjAcBgkqhkiG9w0BCQEWD3Jvb3RAZmFicmlj
+	LmNvbTAeFw0yMTA5MDEyMTQ3MjFaFw0yMjAzMDUyMTQ3MjFaMF8xCzAJBgNVBAYT
+	AlZFMQswCQYDVQQIDAJEQzEQMA4GA1UEBwwHQ2FyYWNhczERMA8GA1UECgwIUEVS
+	U09OQUwxCzAJBgNVBAsMAlRJMREwDwYDVQQDDAhzcnZ1dGlsczCCASIwDQYJKoZI
+	hvcNAQEBBQADggEPADCCAQoCggEBAJsIvlAeYH3dJLSRml2rccAJaSIcOjMQeGWT
+	o0b6YHSnnitLIg8aUdUvvffjvZ0jDCDvuNC/0FIyvrv7YbSVAIABbYaAEbCfAtK9
+	KntH3mUIQdZTrNYqvHJxsCuB55TH2ZRAQlwAcqJ0xJ65ZqxYxsAARFej+UgsmErL
+	R7dZUMxyT5/VBhuOjFc59UdBZ5WWNcp4ofBL/N7gWMOLw/tltWUyJaqZXoKeSufg
+	ga0FLYxuiQmTwrHajZkSsZ7GIYwaf2z964iICZPd4jsSlj4ptRGXM0GeESOkxdWT
+	MqGbilaevBqpgpkb3Ut+2kiYcxdTzqKZZ42XKrvAFTKfNtY620UCAwEAAaNdMFsw
+	CQYDVR0TBAIwADALBgNVHQ8EBAMCBeAwQQYDVR0RBDowOIIYc3J2c2NtdXRpbHMu
+	ZmFicmljLmxvY2FsghZtb25pdG9yZW8uZmFicmljLmxvY2FshwTAqAAUMA0GCSqG
+	SIb3DQEBCwUAA4IBAQAXzumElxMqS5xsU6qNpIBTf9xhlU6n5x/aNt9RTGTc6LTT
+	+pcBJHhpEZ7eGQe3NbDIjgTv6gsdd/HNZCyiC3sXX5iWR/rcFlNdHfhiIUKOFQlz
+	MN3/sCDHwIN3q5BQmH8zSIDHfGVp9lnRLwIkHL0WnB7/1cNRegbkyjXRjbFwlh9t
+	K7qZe5NsmFzOwdtU+So0z69NHkArtE4c5DUMY7ThuTq1A3o6GpMeIZAYOjAICEFf
+	mm2Xdb6ktkj9GmC0nixSsNtlD2EX5j/MG3Hcee6Y5runJiDnuditakuWf6aVIE7Y
+	MZb1RnFOalASBBKEoiAhnolg8V3P04Lgvjw8PKug
+	-----END CERTIFICATE-----
+	subject=/C=VE/ST=DC/L=Caracas/O=PERSONAL/OU=TI/CN=srvutils
+	issuer=/C=VE/ST=DC/L=DC/O=Default Fabric ltd/OU=Support Criptography/CN=criptography/emailAddress=root@fabric.com
+	---
+	No client certificate CA names sent
+	Peer signing digest: SHA512
+	Server Temp Key: ECDH, P-256, 256 bits
+	---
+	SSL handshake has read 1681 bytes and written 415 bytes
+	---
+	New, TLSv1/SSLv3, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+	Server public key is 2048 bit
+	Secure Renegotiation IS supported
+	Compression: NONE
+	Expansion: NONE
+	No ALPN negotiated
+	SSL-Session:
+	    Protocol  : TLSv1.2
+	    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+	    Session-ID: D604DE5A33E8065704B32FEA472223850DC1E1515809EAD313109FBC9B54AF97
+	    Session-ID-ctx: 
+	    Master-Key: 394C87E565B37F86E5D5D519A077EDBD8C5B3C39DB4AD4AAA9AC93EEF4349C388630072D2CAFB771180A4CFF0E5E91D5
+	    Key-Arg   : None
+	    Krb5 Principal: None
+	    PSK identity: None
+	    PSK identity hint: None
+	    TLS session ticket lifetime hint: 300 (seconds)
+	    TLS session ticket:
+	    0000 - 1c b3 d4 87 0d 80 1d 49-be 65 3c d9 6e 3f 43 62   .......I.e<.n?Cb
+	    0010 - ca 8c 17 8e 6b d2 21 ac-d5 a0 a7 0b db 3d 20 70   ....k.!......= p
+	    0020 - ae 3c 76 88 1a b2 ef f5-3f 8d cd c1 0f 66 c5 11   .<v.....?....f..
+	    0030 - 40 7d 18 b7 7d 39 9d 2b-ef 92 40 a5 53 e1 78 a6   @}..}9.+..@.S.x.
+	    0040 - 8b 26 4d fc 1c fd de 4a-8e 69 63 f4 42 bf cc f7   .&M....J.ic.B...
+	    0050 - 94 fd 1d ff f4 81 06 bd-c8 34 67 ca 2f 2c a4 e3   .........4g./,..
+	    0060 - 6a e4 8c 9b 7a c8 e2 4a-27 de 88 b2 c0 6f dc cf   j...z..J'....o..
+	    0070 - 9a 5b 4b 40 58 05 0d e6-03 c3 46 2f 49 c3 26 e7   .[K@X.....F/I.&.
+	    0080 - 8a 4e d7 28 f4 11 72 6a-9f d6 29 88 f5 bc cf de   .N.(..rj..).....
+	    0090 - ce f7 0a 97 19 50 59 fc-6a 48 c7 44 75 60 0c ce   .....PY.jH.Du`..
+	    00a0 - 20 58 4e 00 31 23 95 52-d2 cf 43 55 9f 74 31 3d    XN.1#.R..CU.t1=
+	    00b0 - ea e2 9e 6a ec 2c e4 70-dd af a1 d2 3d 80 43 60   ...j.,.p....=.C`
+
+	    Start Time: 1630619652
+	    Timeout   : 300 (sec)
+	    Verify return code: 0 (ok)
+	---
 
