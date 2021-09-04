@@ -89,7 +89,7 @@ Le damos el permiso de ejecución::
 
 	# chmod -x /path/to/passphrase-script
 
-
+Probamos la configuración y reiniciamos::
 
 	# service httpd configtest
 	# service httpd restart
