@@ -57,8 +57,37 @@ Podemos buscar las siguientes tres lineas en /etc/httpd/conf.d/ssl.conf y las mo
 
 
 
-Reiniciamos::
+Reiniciamos y veremos que nos pide una clave.::
 
+	# systemctl start httpd
+	Enter SSL pass phrase for srvutils:443 (RSA) : 
+
+Configurar el apache para que NO pregunte por la clave en cada reinicio
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Una tecnica es quitarle la clave al private key y ya::
+
+	# openssl rsa -check -in keyservice/srvutils.key -out keyservice/srvutils-without.key
+
+Vamos utilizar la técnica más elegante que es utilizar la Directiva de **SSLPassPhraseDialog** y esto debe ir en el archivo **httpd.conf**::
+
+
+	SSLPassPhraseDialog |/path/to/passphrase-script
+
+Luego creamos un script, (Recuerda darle permisos de ejcución)::
+
+	# vi /path/to/passphrase-script
+	#!/bin/sh
+	echo "PASSWORD"
+
+Le damos el permiso de ejecución::
+
+	# chmod -x /path/to/passphrase-script
+
+
+Tambien la podemos utilizar de esta forma::
+
+	SSLPassPhraseDialog exec:/path/to/passphrase-script
 
 	# service httpd configtest
 	# service httpd restart
