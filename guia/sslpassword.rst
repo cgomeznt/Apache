@@ -74,7 +74,12 @@ Vamos utilizar la técnica más elegante que es utilizar la Directiva de **SSLPa
 
 	SSLPassPhraseDialog |/path/to/passphrase-script
 
-Luego creamos un script, (Recuerda darle permisos de ejcución)::
+
+También la podemos utilizar de esta forma::
+
+	SSLPassPhraseDialog exec:/path/to/passphrase-script
+
+Luego creamos un script, (Recuerda darle permisos de ejecución)::
 
 	# vi /path/to/passphrase-script
 	#!/bin/sh
@@ -85,9 +90,6 @@ Le damos el permiso de ejecución::
 	# chmod -x /path/to/passphrase-script
 
 
-Tambien la podemos utilizar de esta forma::
-
-	SSLPassPhraseDialog exec:/path/to/passphrase-script
 
 	# service httpd configtest
 	# service httpd restart
