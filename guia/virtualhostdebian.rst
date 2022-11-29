@@ -102,8 +102,8 @@ En Debian los archivos de configuracion deben estar en "/etc/apache2"y para el V
 			 ServerAlias public.com
 			 #ErrorLog ${APACHE_LOG_DIR}/public_html_error.log
 			 #CustomLog ${APACHE_LOG_DIR}/public_html_requests.log common
-			 ErrorLog log/public_html_error.log
-			 CustomLog log/public_html_requests.log common
+			 ErrorLog public_html_error.log
+			 CustomLog public_html_requests.log common
 		</VirtualHost>
 
 Cuando creamos el Virtual Host en sites-avaible, aun no lo estamos habilitando para habilitarlo podemos usar una de estas dos (2) tecnicas.
@@ -123,7 +123,7 @@ Verificamos que no exista errores en la configuracion::
 	apachectl configtest
 	Syntax OK
 
-**Tecnica **, 
+**Tecnica 2**, 
 
 lo habilitamos::
 
@@ -142,7 +142,7 @@ Verificamos que no exista errores en la configuracion::
 	
 Reiniciamos el apache.::
 
-	# systemctl restart apache2
+	# systemctl reload apache2
 	
 Familiarizarse con los archivos y directorios importantes de Apache
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -174,11 +174,24 @@ LOG del servidor
 **/var/log/apache2/error.log:** De forma predeterminada, todos los errores se registran en este archivo. La directiva LogLevel en la configuración de Apache especifica cuánto detalle contendrán los registros de errores.
 
 Probamos el nuevo virtual host. En un navegador::
+----------------------------------------------------
 
-http://www.prueba.com
+http://www.public.com
 
 
 
+Configuramos Global ServerName Directive
+--------------------------------------------
 
+Para resolver un **AH00558: Could not reliably determine the server's fully qualified domain name**, deberá agregar una directiva ServerName a su configuración de Apache. Apache usa la directiva ServerName para asignar solicitudes HTTP entrantes a una dirección IP o nombre de host DNS usando directivas VirtualHost para manejar solicitudes para múltiples sitios usando un solo servidor::
+
+	vi /etc/apache2/apache2.conf
+
+	. . .
+	# Include the virtual host configurations:
+	IncludeOptional sites-enabled/*.conf
+
+	# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+	ServerName 127.0.0.1
 
 
