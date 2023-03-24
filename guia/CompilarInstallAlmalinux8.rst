@@ -104,4 +104,45 @@ Iniciarmos el apache::
 	/opt/apache2/2.4.56/bin/apachectl start
 
 
-	 
+Declaracion de la variable que debe indicar en donde estan las Librerías::
+
+	LD_LIBRARY_PATH=/opt/apache2/apr/lib:/opt/apache2/apr-util/lib:/usr/lib:/usr/local/lib (para levantarlo con root)
+
+Instalamos y configuramos authbind::
+
+	rpm -Uvh https://github.com/cgomeznt/Apache/tree/master/tools/authbind-2.1.1-0.1.x86_64.rpm
+	touch /etc/authbind/byport/80
+	chmod 500 /etc/authbind/byport/80
+	chown tomcat /etc/authbind/byport/80
+	authbind -deep /opt/apache2/2.4.56/bin/apachectl start
+
+Creamos la plantilla de servicio en /etc/systemd/system/httpd.service::
+
+	[Unit]
+	Description=Apache - instance %i
+	After=syslog.target network.target
+
+	[Service]
+	Type=forking
+
+	User=weblogic
+	Group=oinstall
+
+	WorkingDirectory=/opt/apache2/2.4.56/
+
+	Environment="LD_LIBRARY_PATH=/opt/apache2/2.4.56/apr/lib"
+
+	ExecStart=/bin/authbind -deep /opt/apache2/2.4.56/bin/apachectl start
+	ExecStop=/bin/authbind -deep /opt/apache2/2.4.56/bin/apachectl stop
+
+	RestartSec=10
+	Restart=always
+
+	[Install]
+	WantedBy=multi-user.target
+
+Recargamos el demonios SystemCtl, habilitamos e iniciamos el Apache::
+
+	systemctl daemon-reload
+	systemctl enable httpd.service
+	systemctl start httpd.service
