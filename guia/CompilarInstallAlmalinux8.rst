@@ -25,7 +25,16 @@ Compilar e Instalar apr::
 	./configure --prefix=/opt/apache2/apr
 	make
 	make install
-	
+Si el APR genera este error **rm: cannot remove `libtoolT': No such file or directory**, editamos el configure y remplazamos esta linea::
+
+	$RM "$cfgfile"
+
+Por esta otra::
+
+	$RM -rf "$cfgfile"
+
+Volvemos hacer el proceso de compilación del APR.
+
 Compilar e Instalar apr-util::
 
 	./configure --prefix=/opt/apache2/apr-util --with-apr=/opt/apache2/2.4.56apr
