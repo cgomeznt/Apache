@@ -4,53 +4,104 @@ Instalar la ultima version de Apache
 Pre requisitos
 +++++++++++++++++++
 
-Instalamos los pre requisitos::
+Apache httpd usa libtool y autoconf para crear un entorno de compilación que se parece a muchos otros proyectos de código abierto.
+
+Se deben atender primero los requisitos indicados por Apache: * apr * apr-util * pcre * pcre2
+
+Tenemos dos (2) formas de instalar los pre requisitos, una por instalacion desde los repositorios y otra descargando los paquetes y compilando.
+
+Instalando los pre requisitos desde los repositorios::
 
 	dnf install wget gcc expat-devel.x86_64
 
 	dnf install libapreq2-devel.x86_64 libapreq2-libs.x86_64
+
+Instalando los pre requisitos desde los funentes descargandos y compilando::
+
+Descarga apr1.7.0 y apr-util1.6.0 desde http://apr.apache.org/.
+
+Compilar e Instalar apr::
+
+	./configure --prefix=/opt/apache2/apr
+	make
+	make install
+	
+Compilar e Instalar apr-util::
+
+	./configure --prefix=/opt/apache2/apr-util --with-apr=/opt/apache2/2.4.56apr
+	make
+	make install
+
+Si apr-util te genera un error de::
+
+	/bin/sh /data/abc/installed/httpd-2.4.56/srclib/apr/libtool --silent --mode=compile gcc -g -O2 -pthread   -DHAVE_CONFIG_H  -DLINUX -D_REENTRANT -D_GNU_SOURCE   -I/data/abc/installed/httpd-2.4.38/srclib/apr-util/include -I/data/abc/installed/httpd-2.4.38/srclib/apr-util/include/private  -I/data/abc/installed/httpd-2.4.38/srclib/apr/include    -o xml/apr_xml.lo -c xml/apr_xml.c && touch xml/apr_xml.lo
+	xml/apr_xml.c:35:19: fatal error: expat.h: No such file or directory
+	 #include <expat.h>
+
+Descargar expat-2.2.9.tar.bz2 from https://libexpat.github.io/.
+
+Extraer expat, compilar e instalar::
+
+	tar xvjf expat-2.2.9.tar.bz2
+	cd expat-2.2.9
+	./configure --prefix=/path-to-expat-installation-dir
+	make
+	make install
+
+Y proceder nuevamente con la instalacion, pero indicandole ahora en donde esta el expat::
+
+	./configure --prefix=/opt/apache2/apr-util --with-apr=/opt/apache2/apr --with-expat=/opt/apache2/expat
+
+Instalamos pcre::
+
+	dnf install pcre-devel.i686 pcre.i686 pcre2.i686
+
 
 Copiar el enlace del ultimo apache estable https://httpd.apache.org/download.cgi
 
 Lo descargamos y lo descomprimimos::
 
 	wget https://dlcdn.apache.org/httpd/httpd-2.4.56.tar.gz
-
 	tar -xvzf httpd-2.4.56.tar.gz
-
 	cd httpd-2.4.56
 
-Esto no aplica, no esta certificado
-############################################################
-cd srclib/
+Compilamos e instalamos el Apache::
 
-Copiar el enlace del ultimo apr y de apr-util https://apr.apache.org/download.cgi
+	export CC="gcc"
+	export CFLAGS="-O2"
 
-wget https://dlcdn.apache.org//apr/apr-1.7.2.tar.gz
-
-wget https://dlcdn.apache.org//apr/apr-util-1.6.3.tar.gz
-
-tar -xvzf apr-1.7.2.tar.gz
-
-tar -xvzf apr-util-1.6.3.tar.gz
-
-mv apr-1.7.2 apr
-
-mv apr-util-1.6.3 apr-util
-############################################################
-
-
-Comenzamos a compilar::
-
-	./configure --prefix=/usr/local/apache
-
+	./configure --with-apr=/opt/apache2/apr  \
+	--with-apr-util=/opt/apache2/apr-util \
+	--prefix=/opt/apache2/2.4.56 \
+	--disable-authnz-ldap \
+	--disable-authnz-fcgi \
+	--disable-isapi \
+	--disable-socache-redis \
+	--disable-bucketeer \
+	--disable-example-hooks \
+	--disable-case-filter \
+	--disable-case-filter-in \
+	--disable-example-ipc \
+	--disable-enable-ldap \
+	--disable-lua \
+	--disable-luajit \
+	--disable-ident \
+	--disable-usertrack  \
+	--disable-proxy-hcheck \
+	--disable-ssl-staticlib-deps \
+	--disable-optional-hook-export \
+	--disable-optional-hook-import \
+	--disable-optional-fn-import \
+	--disable-optional-fn-export \
+	--enable-mods-shared='authn-file authn-core authz-host authz-user authz-core access-compat auth-basic allowmethods socache-shmcb filter deflate mime log-config expires headers unique-id setenvif proxy proxy-connect proxy-http proxy-balancer session ssl lbmethod-byrequests unixd dir rewrite' --enable-mpms-shared=all
+	
 	make
-
+	
 	make install
 	
 Iniciarmos el apache::
 
-	/usr/local/apache2/bin/apachectl start
+	/opt/apache2/2.4.56/bin/apachectl start
 
 
 	 
