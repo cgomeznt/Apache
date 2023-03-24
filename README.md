@@ -3,6 +3,7 @@
 
 * [Instalar Apache en CentOS](guia/instalar.rst)
 * [Compilar Instalar Apache en CentOS 7](guia/CompilarInstallCentos7.rst)
+* [Compilar Instalar Apache en Alamalinux 8](guia/CompilarInstallAlmalinux8.rst)
 * [Configurar un virtualhost](guia/virtualhost.rst)
 * [Configurar un virtualhost en Debian](guia/virtualhostdebian.rst)
 * [Configurar SSL](guia/ssl.rst)
