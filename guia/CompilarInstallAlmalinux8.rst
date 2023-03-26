@@ -10,11 +10,17 @@ Se deben atender primero los requisitos indicados por Apache: * apr * apr-util *
 
 Tenemos dos (2) formas de instalar los pre requisitos, una por instalacion desde los repositorios y otra descargando los paquetes y compilando.
 
+Por Repositorio
++++++++++++++++++++
+
 Instalando los pre requisitos desde los repositorios::
 
 	dnf install wget gcc expat-devel.x86_64
 
 	dnf install libapreq2-devel.x86_64 libapreq2-libs.x86_64
+
+Por compilación
++++++++++++++++++++
 
 Instalando los pre requisitos desde los funentes descargandos y compilando::
 
@@ -65,6 +71,8 @@ Instalamos pcre::
 
 	dnf install pcre-devel.i686 pcre.i686 pcre2.i686
 
+Descargar, Instalar la ultima versión de Apache2
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Copiar el enlace del ultimo apache estable https://httpd.apache.org/download.cgi
 
