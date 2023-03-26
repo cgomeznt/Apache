@@ -115,15 +115,17 @@ Compilamos e instalamos el Apache::
 	make
 	
 	make install
+
+Declaracion de la variable que debe indicar en donde estan las Librerías::
+
+	LD_LIBRARY_PATH=/opt/apache2/apr/lib:/opt/apache2/apr-util/lib:/usr/lib:/usr/local/lib (para levantarlo con root)
 	
 Iniciarmos el apache::
 
 	/opt/apache2/2.4.56/bin/apachectl start
 
 
-Declaracion de la variable que debe indicar en donde estan las Librerías::
 
-	LD_LIBRARY_PATH=/opt/apache2/apr/lib:/opt/apache2/apr-util/lib:/usr/lib:/usr/local/lib (para levantarlo con root)
 
 Instalamos y configuramos authbind::
 
