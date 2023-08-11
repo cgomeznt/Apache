@@ -45,3 +45,15 @@ Reiniciamos el httpd::
 
   # systemctl restart httpd
 
+
+Tambien podemos hacer esta configuración para que solo aplique en la URL que se requiera::
+
+  vi /etc/httpd/conf.d/mod_security.conf
+
+      <location /CCR-portlet/>
+        ##
+        # CRS-20 - Violación de protocolo
+        # Regla 958291: Los PDF de estado de cuenta son solicitados con range: byte=0-xxxxxx generando un falso positivo
+        # Cambio: Se desactiva la regla
+        SecRuleRemoveById 958291
+        ##
