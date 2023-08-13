@@ -84,7 +84,7 @@ Creamos los Vhost que se requieran::
 			ProxyPassReverse / https://www.public.com
 			<IfModule security2_module>
 				SecRuleEngine DetectionOnly
-            </IfModule>
+			</IfModule>
 	</VirtualHost>
 	
 Creamos otro en el cual evitamos el error de SSL Handshake with remote server ::
