@@ -10,6 +10,7 @@
 * [Configurar SSL con Password](guia/sslpassword.rst)
 * [Cipher recomendado para cumplir con PCI](guia/cipherrecomendado.rst)
 * [Configurar Redireccionamiento](guia/redireccionamiento.rst)
+* [Apache como Reverse Proxy con mod_proxy](guia/Apache_Reverse_Proxy_mod_proxy_Debian11.rst)
 * [Configurar Proxy Inverso](guia/proxyreverse.rst)
 * [Algunos ejemplos de Virtual Host](guia/Ejemplos_VirtualHost.rst)
 * [Convertid formato rst to HTML](guia/rsttohtml.rst)
