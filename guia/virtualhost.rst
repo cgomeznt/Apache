@@ -86,6 +86,10 @@ Creamos un archivo por cada virtual host.::
 		 CustomLog logs/public_html_requests.log common
 	</VirtualHost>
 
+Probamos la configuración::
+
+	# apachectl configtest
+	Syntax OK
 
 Reiniciamos el apache.::
 
