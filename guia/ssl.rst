@@ -193,3 +193,59 @@ Ahora con OpenSSl vamos a consultar el portal para culminar de certificar::
 	    Verify return code: 0 (ok)
 	---
 
+
+Para Debian 11
+================
+
+Abrimos el puerto en el archivo /etc/apache2/ports.conf::
+
+	vi /etc/apache2/ports.conf
+	# If you just change the port or add more ports here, you will likely also
+	# have to change the VirtualHost statement in
+	# /etc/apache2/sites-enabled/000-default.conf
+	
+	#Listen 80
+	
+	<IfModule ssl_module>
+	        Listen 443
+	</IfModule>
+	
+	<IfModule mod_gnutls.c>
+	        Listen 443
+	</IfModule>
+
+
+Creamos la configurarón de Apache con  Strong Encryption::
+
+	vi  /etc/apache2/conf-available/ssl.conf
+
+	SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+	SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+	SSLHonorCipherOrder On
+	# Disable preloading HSTS for now.  You can use the commented out header line that includes
+	# the "preload" directive if you understand the implications.
+	# Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+	Header always set X-Frame-Options DENY
+	Header always set X-Content-Type-Options nosniff
+	# Requires Apache >= 2.4
+	SSLCompression off
+	SSLUseStapling on
+	SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+	# Requires Apache >= 2.4.11
+	SSLSessionTickets Off
+
+Editamos ahora el VHOST y ajustamos los parametros de SSL::
+
+	vi www.free.com.conf
+	<VirtualHost *:443>
+	         ServerAdmin webmaster@example.com
+	         DocumentRoot /var/www/html/www.free.com
+	         ServerName www.free.com
+	         ServerAlias free.com
+	         SSLEngine on
+	         SSLCertificateFile    /certs/sencamercrt.pem
+	         SSLCertificateKeyFile /certs/sencamerkey.pem
+	
+	         ErrorLog /var/log/apache2/free_html_error.log
+	         CustomLog /var/log/apache2/free_html_requests.log common
+	</VirtualHost>
