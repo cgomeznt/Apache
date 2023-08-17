@@ -1,0 +1,172 @@
+ModSecurity: collections_remove_stale: Failed deleting collection
+
+Se debe verificar en el archivo de configuracion de modsecurity la opcion "SecDataDir" para ubicar donde se esta guardando el archivo "ip.pag"
+
+cat /etc/httpd/
+blacklists/    conf/          conf.d/        logs/          modsecurity.d/ modules/       run/
+
+[usuario@srv-vwaf01]:/home/usuario>cat /etc/httpd/conf.d/011_modsecurity.conf
+cat: /etc/httpd/conf.d/011_modsecurity.conf: Permission denied
+[usuario@srv-vwaf01]:/home/usuario>sudo cat /etc/httpd/conf.d/011_modsecurity.conf
+LoadModule security2_module modules/mod_security2.so
+
+<IfModule !mod_unique_id.c>
+    LoadModule unique_id_module modules/mod_unique_id.so
+</IfModule>
+<IfModule mod_security2.c>
+    # ModSecurity Core Rules Set configuration
+    Include modsecurity.d/*.conf
+    Include modsecurity.d/activated_rules/*.conf
+
+    # Default recommended configuration
+    SecRuleEngine On
+    SecRuleEngine DetectionOnly
+    SecRequestBodyAccess On
+    SecResponseBodyMimeType (null) text/html text/plain text/xml application/json
+    SecDefaultAction "phase:2,deny,log,status:403"
+
+
+    SecRule REQUEST_HEADERS:Content-Type "text/xml" \
+         "id:'200000',phase:1,t:none,t:lowercase,pass,nolog,ctl:requestBodyProcessor=XML"
+
+
+    # Block all requests that have the string "secret" in the URI
+    SecRule REQUEST_URI "secret" "id:'200005'"
+
+    SecRequestBodyLimit 13107200
+    SecRequestBodyNoFilesLimit 131072
+    SecRequestBodyInMemoryLimit 131072
+    SecRequestBodyLimitAction Reject
+    SecRule REQBODY_ERROR "!@eq 0" \
+    "id:'200001', phase:2,t:none,log,deny,status:400,msg:'Failed to parse request body.',logdata:'%{reqbody_error_msg}',severity:2"
+    SecRule MULTIPART_STRICT_ERROR "!@eq 0" \
+    "id:'200002',phase:2,t:none,log,deny,status:44,msg:'Multipart request body \
+    failed strict validation: \
+    PE %{REQBODY_PROCESSOR_ERROR}, \
+    BQ %{MULTIPART_BOUNDARY_QUOTED}, \
+    BW %{MULTIPART_BOUNDARY_WHITESPACE}, \
+    DB %{MULTIPART_DATA_BEFORE}, \
+    DA %{MULTIPART_DATA_AFTER}, \
+    HF %{MULTIPART_HEADER_FOLDING}, \
+    LF %{MULTIPART_LF_LINE}, \
+    SM %{MULTIPART_MISSING_SEMICOLON}, \
+    IQ %{MULTIPART_INVALID_QUOTING}, \
+    IP %{MULTIPART_INVALID_PART}, \
+    IH %{MULTIPART_INVALID_HEADER_FOLDING}, \
+    FL %{MULTIPART_FILE_LIMIT_EXCEEDED}'"
+
+    SecRule MULTIPART_UNMATCHED_BOUNDARY "!@eq 0" \
+    "id:'200003',phase:2,t:none,log,deny,status:44,msg:'Multipart parser detected a possible unmatched boundary.'"
+
+    SecPcreMatchLimit 1000
+    SecPcreMatchLimitRecursion 1000
+
+    SecRule TX:/^MSC_/ "!@streq 0" \
+            "id:'200004',phase:2,t:none,deny,msg:'ModSecurity internal error flagged: %{MATCHED_VAR_NAME}'"
+
+    SecResponseBodyAccess On
+    SecDebugLog /var/log/httpd/modsec_debug.log
+    SecDebugLogLevel 0
+    SecAuditEngine RelevantOnly
+    SecAuditLogRelevantStatus "^(?:5|4(?!04))"
+    SecAuditLogParts ABIJDEFHZ
+    SecAuditLogType Serial
+    SecAuditLog /var/log/httpd/modsec_audit.log
+    SecArgumentSeparator &
+    SecCookieFormat 0
+    SecTmpDir /var/lib/mod_security
+    SecDataDir /var/lib/mod_security
+    SecCollectionTimeout 600
+    #SecDebugLog logs/modsec_debug.log
+    #SecDebugLogLevel 9
+</IfModule>
+
+
+El "SecDataDir" indica que el archivo "ip.pag" se guarda en "/var/lib/mod_security"
+
+
+sudo ls -lh /var/lib/mod_security
+total 5.5
+-rw-r----- 1 apache apache    0 Jun 25  2015 global.dir
+-rw-r----- 1 apache apache    0 Jun 25  2015 global.pag
+-rw-r----- 1 apache apache 920K Oct  6 12:32 ip.dir
+-rw-r----- 1 apache apache 5G Oct  6 12:32 ip.pag
+
+
+Ese archivo se monta en memoria y ocupa gran espacio de "/var" 
+
+
+SOLUCIÓN
+==========
+
+$ sudo /usr/local/modsecurity/bin/modsec-sdbm-util -h
+
+ modsec-sdbm-util v1.0
+
+This utility was created in order to make easy the maintenance of the SDBM files
+which stores ModSecurity persistent collections.
+
+  -k, shrink: Removes all the expired elements as long as others not well
+        formated items from the database.
+  -n, new: Extract valid items of a database to a new one. Output will be:
+        /tmp/new_db.[ip,pag]
+  -s, status: Print information about the table, such us the amount of items,
+        amount of expired items and also the amount of malformed items that
+        may be using space;
+  -d, dump: Dump all database items to `stdout`;
+  -u, unpack: Interpret the content of the value as ModSecurity does, printing
+        the results to the console. (This does not make sense without the
+        -d option);
+  -x, expired: Print only the expired elements. (As unpack, this item does not
+        make sense without the dump option);
+  -r, remove: Expects to receive a key as a paramter to be removed;
+  -v, verbose: Some extra information about what this utility is doing.
+  -h, help: this message.
+
+
+
+==================================================================
+
+$ sudo /usr/local/modsecurity/bin/modsec-sdbm-util -k /var/lib/mod_security/ip.pag
+Opening file: /var/lib/mod_security/ip.pag
+Database ready to be used.
+Failed to delete key: "
+"
+
+Total of 1 elements processed.
+0 elements removed.
+Expired elements: 0, inconsistent items: 1
+Fragmentation rate: 100.00% of the database is/was dirty data.
+
+
+==================================================================
+
+$ sudo /usr/local/modsecurity/bin/modsec-sdbm-util -n /var/lib/mod_security/ip.pag
+Opening file: /var/lib/mod_security/ip.pag
+Database ready to be used.
+New database generated with valid keys at: /tmp/new_db
+
+
+==================================================================
+
+$ ls -ltrh /tmp
+-rwxr-xr-x  1 root root 1.6M Oct  8 20:07 new_db.pag*
+-rwxr-xr-x  1 root root 4.0K Oct  8 20:07 new_db.dir*
+
+==================================================================
+
+$ sudo mv /tmp/new_db.* /var/lib/mod_security/
+
+$ sudo chown apache: /var/lib/mod_security/new_db.*
+
+# cd /var/lib/mod_security
+
+# mv ip.dir ip.dir.orig && mv ip.pag ip.pag.orig && mv new_db.dir ip.dir && mv new_db.pag ip.pag
+
+# ls -ltrh
+
+# df -h && free -h && uptime
+
+NOTA: Mientras no se borren los ip.pag.orig y el ip.dir.orig, se seguirá manteniendo en uso de la Memoria.
+
+# rm -rf ip.pag.orig ip.dir.orig
