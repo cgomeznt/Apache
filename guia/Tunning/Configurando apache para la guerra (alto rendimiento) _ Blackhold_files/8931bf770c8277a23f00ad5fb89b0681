@@ -1,0 +1,39 @@
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+				<head>
+					<title>Blocked URL: 2.gravatar.com</title>					<meta http-equiv="Pragma" content="no-cache" />
+					<meta http-equiv="Pragma-directive" content="no-cache" />
+					<meta http-equiv="cache-directive" content="no-cache" />
+					<link rel="stylesheet" href="styles/mi5.css" />
+										<script language="JavaScript">
+						<!--
+							function spywareinfo (signature) {
+								var details = window.open("spywareinfo.php?sid=" + signature,'detail','width=750,height=400,scrollbars=1,status=no,resizable');
+								details.focus();
+							}
+						//-->
+					</script>
+				</head>
+				<body>
+				<div id="mainContent">
+	<div id="mainText">
+				<img src="images/upload/CCR_SWG_LOGO.jpg" alt="Symantec Defense Centre" />
+		<hr noshade="noshade" size="1" style="margin-bottom: 10px;" />
+		<table>
+			<tr>
+								<td style="padding-left: 15px;">
+					<h3>Symantec Web Gateway</h3>
+					<h1>El acceso al sitio web 2.gravatar.com está restringido por políticas internas.</h1>									<p>
+										URL: 2.gravatar.com/avatar/8931bf770c8277a23f00ad5fb89b0681?s=40&amp;d=mm&amp;r=g									</p>
+								<p class='translated'>Esta URL, 2.gravatar.com, es una ubicación conocida de software malicioso e infringe las normas de la compañía.</p>					<p class='translated'>
+						<a href="javascript:spywareinfo('402653250');">Haga clic aquí </a>
+						para obtener más información.					</p>
+									</td>
+			</tr>
+		</table>
+	</div>
+	<div class="copyright">&copy; Copyright 2004-2016, Symantec Corporation. All rights reserved.</div>
+</div>
+				</body>
+			</html>
+		

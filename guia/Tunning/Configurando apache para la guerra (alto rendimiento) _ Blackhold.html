@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/ -->
+<html lang="ca" class=" social-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!-- "H5": The HTML-5 WordPress Template Theme -->
+		
+		<title>Configurando apache para la guerra (alto rendimiento) | Blackhold</title>
+		<meta name="description" content="Blackhold">
+
+		<link rel="stylesheet" type="text/css" href="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/style.css" media="screen">
+		<link rel="alternate" type="text/xml" title="Blackhold RSS 0.92 Feed" href="http://blackhold.nusepas.com/feed/rss/">
+		<link rel="alternate" type="application/atom+xml" title="Blackhold Atom Feed" href="http://blackhold.nusepas.com/feed/atom/">
+		<link rel="alternate" type="application/rss+xml" title="Blackhold RSS 2.0 Feed" href="http://blackhold.nusepas.com/feed/">
+		<link rel="pingback" href="http://blackhold.nusepas.com/xmlrpc.php">
+
+				
+<!-- All in One SEO Pack 2.3.11 by Michael Torbert of Semper Fi Web Design[171,250] -->
+<meta name="description" content="Iba a poner en el título alta disponibilidad pero no trata de esto, sino de como configurar el apache de tal forma que pueda servir su contenido de una forma">
+
+<link rel="canonical" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/">
+<!-- /all in one seo pack -->
+<link rel="dns-prefetch" href="http://s0.wp.com/">
+<link rel="dns-prefetch" href="http://s.gravatar.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Blackhold » Configurando apache para la guerra (alto rendimiento) Canal dels comentaris" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/blackhold.nusepas.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/wp-emoji-release.min.js.descarga" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="social_comments-css" href="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/comments.css" type="text/css" media="screen">
+<link rel="stylesheet" id="jetpack_css-css" href="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/jetpack.css" type="text/css" media="all">
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/jquery.js.descarga"></script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/jquery-migrate.min.js.descarga"></script>
+<link rel="https://api.w.org/" href="http://blackhold.nusepas.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blackhold.nusepas.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blackhold.nusepas.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Graffitianalysis" href="http://blackhold.nusepas.com/2010/05/23/graffitianalysis/">
+<link rel="next" title="¿Porqué hitler tuvo tantos seguidores?" href="http://blackhold.nusepas.com/2010/05/25/porque-hitler-tuvo-tantos-seguidores/">
+<meta name="generator" content="WordPress 4.7">
+<link rel="shortlink" href="http://wp.me/pF7gP-oV">
+<link rel="alternate" type="application/json+oembed" href="http://blackhold.nusepas.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fblackhold.nusepas.com%2F2010%2F05%2F24%2Fconfigurando-apache-para-la-guerra-alto-rendimiento%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://blackhold.nusepas.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fblackhold.nusepas.com%2F2010%2F05%2F24%2Fconfigurando-apache-para-la-guerra-alto-rendimiento%2F&amp;format=xml">
+
+
+
+	<!-- Added by EventCalendar plugin. Version 3.1.4 -->
+
+	<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/xmlhttprequest.js.descarga"></script>
+
+	<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/ec3.js.descarga"></script>
+
+	<script type="text/javascript"><!--
+
+	ec3.start_of_week=1;
+
+	ec3.month_of_year=new Array('gener','febrer','març','abril','maig','juny','juliol','agost','setembre','octubre','novembre','desembre');
+
+	ec3.month_abbrev=new Array('gen.','febr.','març','abr.','maig','juny','jul.','ag.','set.','oct.','nov.','des.');
+
+	ec3.myfiles='http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53';
+
+	ec3.home='http://blackhold.nusepas.com';
+
+	ec3.hide_logo=0;
+
+	ec3.viewpostsfor="View posts for %1$s %2$s";
+
+	// --></script>
+
+
+
+
+<style type="text/css" media="screen">
+
+@import url(http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/ec3.css);
+
+.ec3_ec {
+
+ background-image:url(http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/ec.png) !IMPORTANT;
+
+ background-image:none;
+
+ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/ec.png');
+
+}
+
+
+#ec3_shadow0 {
+
+ background-image:url(http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/shadow0.png) !IMPORTANT;
+
+ background-image:none;
+
+}
+
+#ec3_shadow0 div {
+
+ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/shadow0.png',sizingMethod='scale');
+
+}
+
+#ec3_shadow1 {
+
+ background-image:url(http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/shadow1.png) !IMPORTANT;
+
+ background-image:none;
+
+ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/shadow1.png',sizingMethod='crop');
+
+}
+
+#ec3_shadow2 {
+
+ background-image:url(http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/shadow2.png) !IMPORTANT;
+
+ background-image:none;
+
+}
+
+#ec3_shadow2 div {
+
+ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://blackhold.nusepas.com/wp-content/plugins/event-calendar-3-for-php-53/shadow2.png',sizingMethod='scale');
+
+}
+
+
+</style>
+
+
+
+<script type="text/javascript"><!--
+
+	            function addEvent(elm, evType, fn, useCapture)
+	            // addEvent and removeEvent
+	            // cross-browser event handling for IE5+,  NS6 and Mozilla
+	            // By Scott Andrew
+	            {
+	              if (elm.addEventListener){
+	                  elm.addEventListener(evType, fn, useCapture);
+	                  return true;
+	              } else if (elm.attachEvent){
+	                  var r = elm.attachEvent("on"+evType, fn);
+	                  return r;
+	              } else {
+	                  // alert("Handler could not be removed");
+	              }
+	            }
+	            function externalLinks() {
+	             if (!document.getElementsByTagName) return;
+	             var anchors = document.getElementsByTagName("a");
+				 var newwindows =0;
+	             for (var i=0; i<anchors.length; i++) {
+	               var anchor = anchors[i];
+	               if (anchor.getAttribute("href") && anchor.getAttribute("rel") == "external") {
+	                        anchor.setAttribute("target","_blank");
+							newwindows++;
+					}
+	             }
+	            }
+
+	            addEvent(window, "load", externalLinks);
+
+	            //-->
+	            </script>
+	            
+<link rel="dns-prefetch" href="http://v0.wordpress.com/">
+<style type="text/css">img#wpstats{display:none}</style>
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Configurando apache para la guerra (alto rendimiento)">
+<meta property="og:url" content="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/">
+<meta property="og:description" content="Iba a poner en el título alta disponibilidad pero no trata de esto, sino de como configurar el apache de tal forma que pueda servir su contenido de una forma mucho mas eficiente. Cuando tenemos un …">
+<meta property="article:published_time" content="2010-05-23T23:59:38+00:00">
+<meta property="article:modified_time" content="2010-05-23T23:59:38+00:00">
+<meta property="og:site_name" content="Blackhold">
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg">
+<meta property="og:locale" content="ca_ES">
+<meta name="twitter:card" content="summary">
+
+		<script src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/h5.js.descarga"></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/ga.js.descarga" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6848523-6");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<meta name="google-site-verification" content="uYFYAsqxAQf7nnkLmF_vE_59zaG8X8Obt7N1MtRGbsA">
+
+	</head>
+	<body class="post-template-default single single-post postid-1545 single-format-standard">
+
+		<header>
+			<h1><a href="http://blackhold.nusepas.com/">Blackhold</a></h1>
+		</header>
+		<nav>
+			<ul>
+				<li class="page_item page-item-2593"><a href="http://blackhold.nusepas.com/chess/">chess</a></li>
+<li class="page_item page-item-890"><a href="http://blackhold.nusepas.com/irc/">IRC</a></li>
+<li class="page_item page-item-1949"><a href="http://blackhold.nusepas.com/contacto/">Contacto</a></li>
+<li class="page_item page-item-2301"><a href="http://blackhold.nusepas.com/quant-a/">About</a></li>
+			</ul>
+		</nav>
+	
+		<section>
+			<article id="post-1545">
+				<header>
+					<h1><a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/" rel="bookmark" title="Permanent Link to Configurando apache para la guerra (alto rendimiento)">Configurando apache para la guerra (alto rendimiento)</a></h1>
+					<p>Posted on maig 24th, 2010 by admin</p>
+				</header>
+				<section>
+					<p>Iba a poner en el título alta disponibilidad pero no trata de esto, sino de como configurar el apache de tal forma que pueda servir su contenido de una forma mucho mas eficiente.</p>
+<p>Cuando tenemos un servidor apache sirviendo nuestro blog que apenas visitan una decena de personas al día esto no nos tiene que preocupar, pero si tenemos que hacerlo si en este mismo servidor hay un numero mucho mas alto de visitas diarias.</p>
+<p>Hace un tiempo me pidieron configurar un apache para alto rendimiento, como no había configurado hasta el momento ninguno no me había preocupado ni siquiera para este tema, pero ahora con la vuelta a la carga con marsupi es necesario tener en cuenta alguna de estas cosas.</p>
+<p>En realidad lo que significa configurar un apache para alto rendimiento es primero de todo, saber qué tipo de datos vas a transferir y segundo el ancho de banda y capacidad de hardware de qué dispones.<br>
+Al leer <a href="http://www.howtoforge.com/configuring_apache_for_maximum_performance" target="_blank">este artículo</a> (que tan amablemente trataré de traducir), me quedé perpleja, pensaba que la gran mayoría de las cosas me sonarían a chino, me venía de nuevo a la cabeza la semejanza a un trauma craneoencefálico a un chichón o una gastroenteritis a un dolor de barriga.<br>
+La idea es que el sistema pueda recibir muchas visitas sin que se sature ni la memoria ni el ancho de banda, a partir de ello aquí tenéis algunas ideas de por donde empezar.</p>
+<p><span id="more-1545"></span><br>
+<strong>1. Cargar sólo los módulos necesarios</strong><br>
+Es estúpido tener encima de la mesa libros que no vas a usar para el trabajo que estás haciendo, así que lo mejor es sacarlo de ahí, para ello tenemos el comando a2dismod, que desahabilita los módulos que tenemos instalados.<br>
+Como anotación, para cargar módulos es con el a2enmod. Estos dos comandos la única cosa que hacen son links simbólicos de /etc/apache2/mods-available a /etc/apache2/mods-enabled.<br>
+Para añadir mas módulos basta consultar nuestro gestor de paquetes o la web de apache.</p>
+<p><strong>2. Usar los módulos de multiprocesing apropiados</strong><br>
+Apache es un servicio que ofrece el servicio creando nuevos procesos para cada una de las tareas a realizar, desde servir una imágen, escribir una línea a log, etc.<br>
+En apache hay 2 versiones de multi processing, la <a href="http://httpd.apache.org/docs/2.2/mod/worker.html" target="_blank">worker</a> y la <a href="http://httpd.apache.org/docs/2.2/mod/prefork.html" target="_blank">prefork</a>. La worker por ejemplo trabaja a un rendimiento y escalabilidad mucho mayores a la prefork, cada proceso que genera varios procesos hijos, estos son agrupados y permiten usar la misma conexión, esto en contra pero hace que si falla uno de los procesos hijo falla todo el proceso padre, la prefork evita esto, pero es mas lenta ya que cada proceso hijo genera una conexión.</p>
+<p><strong>3. DNS lookup</strong><br>
+Cada vez que hacemos una conexión a un cliente el apache tiene que resolver el nombre del cliente, esto hace que tenga que hacer una petición al DNS, para accelerar este proceso, apache tiene la posibilidad de crear una lista interna de hosts-ips.<br>
+La opción en apache es la HostnameLookups, por defecto viene desactivada desde la versión 1.3 y por esto se recomienda el uso de un programa de post-procesamiento llamado <a href="http://httpd.apache.org/docs/2.2/programs/logresolve.html" target="_blank">logresolve</a>.</p>
+<p><strong>4. AllowOverride</strong><br>
+Si no vamos a usar ficheros .htaccess o simplemente si estamos administrando un servidor y no queremos que los usuarios puedan modificar las opciones por defecto de apache, simplemente cuando definamos una sección de directory, especificamos AllowOverride None.<br>
+AllowOverride All buscaría en los directorios típicos ficheros de configuración .htaccess, esto lo que hace es que cada vez que se carga una página web vaya a buscar dicho fichero. Así que es recomendable dejarlo siempre deshabilitado a menos que queremos que un directorio tenga un comportamiento especial, como podría ser con el mod_rewrite en los wordpress mu.</p>
+<p><strong>5. FollowSymLinks y SymLinksOwnerMatch</strong><br>
+Personalmente el SymLinksOwnerMatch ni lo conocía, pero simplemente lo que hace es lo mismo que FollowSymLinks pero que comprueba que el usuario que está ejecutando el proceso de apache puede acceder a aquel directorio.<br>
+Esto es una magnífica medida de seguridad pero también consume muchos mas recursos que el FollowSymLinks.<br>
+El FollowSymLinks lo que hace es que si en un directorio tienes un vínculo simbólico a otro directorio lo sigue, así que podrías hacer un link simbólico en /var/www llamado música apuntando a tu directorio de música del home y sería como tener la música en el directorio de apache, pero cuidado! hay que estar muy atento de no vincular un directorio que dentro tenga otros directorios con contenido delicado, ya que este también será accesible (importante tener en cuenta el valor Index, que permite hacer un índice del contenido del directorio).</p>
+<p><strong>6. Negociación</strong><br>
+Otro de los valores interesantes es Multiviews, esto lo que hace es que cada vez que accedes a un directorio escanea el contenido de este, si básicamente vas a acceder a unos ficheros ya vinculados y no tienes por qué saber el contenido de este directorio simplemente esborra la opción Multiviews, ahorrarás al pobre apache de tener que hacer esta misma tarea innecesaria cada vez.</p>
+<p><strong>7. MaxClients</strong><br>
+MaxClients define el numero de clientes que pueden conectarse, si el numero es demasiado bajo hará que haya muchos timeouts de las conexiones aunque la máquina no se disparará en consumo de RAM, en caso contrario, si el valor es alto apenas se darán timeouts, pero en momentos de mucho tráfico hará que nuestra máquina swapee y acabe funcionando lenta.</p>
+<p>Para calcular este valor podemos usar esta fórmula:</p>
+<p>MaxClients = Total RAM dedicated to the web server / Max child process size</p>
+<p><strong>8. MinSpareServers, MaxSpareServers, y StartServers</strong><br>
+Este es similar al anterior pero hace referencia al numero de procesos hijos que puede tener activos un proceso. Dependiendo de la carga de los procesos puede hacer que tarde mas o menos en servir el contenido. Por ejemplo si tenemos una página que se tiene que procesar mucha información, nos va a interesar que use el máximo numero de procesos hijo para resolver el contenido, pero por contra, si definimos este numero muy bajo y el proceso es muy alto va a hacer que se tarde mucho en servir el contenido final.</p>
+<p><strong>9. MaxRequestsPerChild</strong><br>
+Por defecto está a 0, es decir que no hay límite, pero no se recomienda en servidores con muchas visitas, ya que estas podrían hacer caer el servidor.</p>
+<p><strong>10. KeepAlive y KeepAliveTimeout</strong><br>
+La directiva KeepAlive, permite hacer varias peticiones sobre la misma conexión TCP. Esto es particularmente útil cuando se están sirviendo páginas HTML con muchas imágenes. Si KeepAlive está en Off, entonces se tiene que hacer una conexión TCP para cada imagen, entonces para evitar esto se pondría el KeepAlive en On.<br>
+KeepAliveTimeout define el tiempo que tiene que esperar para la siguiente petición. Se recomienda definir este valor de 2 a 5 segundos, ya que si es demasiado grande, se estaría desaprovechando la posibilidad de ofrecer otro contenido a otro visitante durante la espera.</p>
+<p><strong>11. Compresión HTTP y caching</strong><br>
+La compresión HTTP está especificada desde la versión 1.1 de HTTP, así que está soportada por todos los navegadores. Esta opción permite disminuir drásticamente el consumo de ancho de banda (según <a href="http://bobcares.com/article8.html#COMPRS" target="_blank">estudios</a> del 75,2%!), pero en su contra consume muchos mas recursos, ya que usa gzip para comprimir el contenido antes de mandarlo.<br>
+En apache se puede habilitar la compresión habilitando el módulo <a href="http://httpd.apache.org/docs/2.2/mod/mod_deflate.html" target="_blank">mod_deflate</a>.</p>
+<p>Con caching lo que se hace es que el contenido ya pedido anteriormente ya esté preparado para servirlo. Para configurar estos valores usamos <a href="http://httpd.apache.org/docs/2.2/mod/mod_expires.html" target="_blank">mod_expires</a> y <a href="http://httpd.apache.org/docs/2.2/mod/mod_headers.html" target="_blank">mod_headers</a>. En versiones anteriores a la 2.2 es necesario habilitar <a href="http://httpd.apache.org/docs/2.2/mod/mod_cache.html" target="_blank">mod_cache</a>, en posteriores esta opción ya viene activada por defecto.</p>
+<p><strong>12. Separar el contenido dinámico y el estático</strong><br>
+Anda que buena idea! los que administramos apache sabemos que no es lo mismo servir una página HTML puro y duro que una con PHP, por esto que mediante los proxys HTTP podemos decirle al apache que tenemos en el puerto 80 que mande las peticiones de cierto contenido a otro servidor apache que sólo se encargue de servir imágenes, documentos o páginas web estáticas.<br>
+Un servidor que ofrece contenido dinámico puede llegar a consumir 20M por proceso, en cambio uno de estático como mucho 1M.<br>
+Esto lo podremos hacer mediante los módulos <a href="http://httpd.apache.org/docs/2.2/mod/mod_proxy.html" target="_blank">mod_proxy</a> y <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html" target="_blank">rewrite_module</a> (comentado antes).</p>
+<p>Y hasta aquí algunas de las opciones para tener nuestro apache super maqueadito, analiza primero de todo el tipo de tráfico que va a tener tu servidor y si tienes la posibilidad de tener varios, separa el tipo de servicio que tengan que ofrecer a un mas alto rendimiento.</p>
+
+				</section>
+				<footer>
+										
+					<p>
+						This entry was posted on dilluns, maig 24th, 2010 at 01:59 and is filed under <a href="http://blackhold.nusepas.com/category/linux/" rel="category tag">Linux</a>, <a href="http://blackhold.nusepas.com/category/opensource/" rel="category tag">Opensource</a>. 
+						You can follow any responses to this entry through the <a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/feed/">RSS 2.0</a> feed.
+
+													You can <a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#respond">leave a response</a>, or <a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/trackback/" rel="trackback">trackback</a> from your own site.
+
+						
+					</p>
+				</footer>
+			</article>
+
+			<div id="social">
+		<div class="social-post">
+		<div id="loading" style="display:none">
+			<input type="hidden" id="reload_url" value="http://blackhold.nusepas.com/index.php?social_controller=auth&amp;social_action=reload_form&amp;redirect_to=http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/&amp;post_id=1545">
+			Logging In...		</div>
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Profile <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#respond" style="display:none;">cancel</a></small></h3>			<form action="http://blackhold.nusepas.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<div class="social-sign-in-links social-clearfix">
+		<a class="social-twitter social-imr social-login comments" href="http://blackhold.nusepas.com/index.php?social_controller=auth&amp;social_action=authorize&amp;key=twitter&amp;post_id=1545" id="twitter_signin" target="_blank">Sign in with Twitter</a>
+		<a class="social-facebook social-imr social-login comments" href="http://blackhold.nusepas.com/index.php?social_controller=auth&amp;social_action=authorize&amp;key=facebook&amp;post_id=1545" id="facebook_signin" target="_blank">Sign in with Facebook</a>
+	</div>
+<div class="social-divider">
+	<span>or</span>
+</div>
+<p class="social-input-row social-input-row-comment"><label for="comment" class="social-label">Comment</label><textarea id="comment" name="comment" class="social-input" required="required"></textarea></p><p class="social-input-row social-input-row-author"><label for="author" class="social-label">Name</label><input id="author" name="author" class="social-input" required="required" type="text" value=""></p>
+<p class="social-input-row social-input-row-email"><label for="email" class="social-label">Email</label><input id="email" name="email" class="social-input" required="required" type="text" value=""><small class="social-help">Not published</small></p>
+<p class="social-input-row social-input-row-url"><label for="url" class="social-label">Website</label><input id="url" name="url" class="social-input" type="text" value=""></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post It"> <input type="hidden" name="comment_post_ID" value="1545" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+<input type="hidden" id="use_twitter_reply" name="use_twitter_reply" value="0"><input type="hidden" id="in_reply_to_status_id" name="in_reply_to_status_id" value=""></p><div id="commentform-extras"><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="0aba01639d"></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Aviseu-me del seguiment dels comentaris per correu.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notifica'm per correu electrònic si hi ha entrades noves.</label></p><p style="display: none;"></p></div>			<input type="hidden" id="ak_js" name="ak_js" value="1481120005809"></form>
+			</div><!-- #respond -->
+		</div>
+	<div id="social-tabs-comments">
+				<ul class="social-nav social-clearfix">
+			<li class="social-all social-tab-main social-current-tab"><a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#" rel="social-all"><span>13 Replies</span></a></li>
+			<li class="social-wordpress"><a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#" rel="wordpress"><span>13 Comments</span></a></li>
+			<li class="social-twitter"><a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#" rel="social-twitter"><span>0 Tweets</span></a></li>
+			<li class="social-facebook"><a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#" rel="social-facebook"><span>0 Facebook</span></a></li>
+			<li class="social-pingback"><a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#" rel="social-pingback"><span>0 Pingbacks</span></a></li>
+		</ul>
+
+		<!-- panel items -->
+		<div id="social-comments-tab-all" class="social-tabs-panel social-tabs-first-panel">
+			<div id="comments" class="social-comments">
+				<div class="social-last-reply-when">Last reply was 7 months ago</div><div class="cf-clearfix"></div>				<ol class="social-commentlist">
+				<li class="wordpress even thread-even depth-1 social-comment social-clearfix social-wordpress" id="li-comment-837">
+<div class="social-comment-inner social-clearfix" id="comment-837">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/516a75841590d0cd497cb285e7524b0e" srcset="http://2.gravatar.com/avatar/516a75841590d0cd497cb285e7524b0e?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://tenak.net/" rel="external nofollow" class="url">marc0s</a></cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-837" class="social-posted-when" target="_blank">24 maig 2010</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>o también puedes instalar Cherokee ;-)</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=837#respond" onclick="return addComment.moveForm( &quot;comment-837&quot;, &quot;837&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a marc0s">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-837 -->
+</li><!-- #comment-## -->
+<li class="wordpress odd alt thread-odd thread-alt depth-1 social-comment social-clearfix social-wordpress" id="li-comment-838">
+<div class="social-comment-inner social-clearfix" id="comment-838">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/64121634e3065a843cda52a1c3ac379b" srcset="http://0.gravatar.com/avatar/64121634e3065a843cda52a1c3ac379b?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn">Consejo</cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-838" class="social-posted-when" target="_blank">24 maig 2010</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>… o instalar nginx.</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=838#respond" onclick="return addComment.moveForm( &quot;comment-838&quot;, &quot;838&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Consejo">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-838 -->
+</li><!-- #comment-## -->
+<li class="wordpress even thread-even depth-1 social-comment social-clearfix social-wordpress" id="li-comment-839">
+<div class="social-comment-inner social-clearfix" id="comment-839">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/614a3bff75dc4b721ea5d1328d834a5d" srcset="http://0.gravatar.com/avatar/614a3bff75dc4b721ea5d1328d834a5d?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://www.vision360.com.mx/" rel="external nofollow" class="url">Roger Siadous</a></cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-839" class="social-posted-when" target="_blank">3 juny 2010</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>hola, tengo un servidor dedicado apache con <a href="http://www.theplanet.com/" rel="nofollow">http://www.theplanet.com</a> necesito mejorar la configucion del apache asi como la instalacion de moludos debido a que no me funciona correctamente muchos plugins,componentes, en el joomla.</p>
+<p>necesito hacer una evaluación del porque hay plugins y componentes que no funcionan correctamente en mi servidor. </p>
+<p>los pullgins y componentes que no funcionan son los relacionados con imagenes, galeria de imagenes, videos, etc</p>
+<p>espero que me puedas ayudar.</p>
+<p>gracias<br>
+roger siadous</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=839#respond" onclick="return addComment.moveForm( &quot;comment-839&quot;, &quot;839&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Roger Siadous">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-839 -->
+</li><!-- #comment-## -->
+<li class="wordpress byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1 social-comment social-clearfix social-wordpress" id="li-comment-840">
+<div class="social-comment-inner social-clearfix" id="comment-840">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/1471fdc10ed47b6c999ff353fea9d429" srcset="http://1.gravatar.com/avatar/1471fdc10ed47b6c999ff353fea9d429?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://www.nusepas.com/" rel="external nofollow" class="url">Blackhold</a></cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-840" class="social-posted-when" target="_blank">17 març 2011</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>també ngnix</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=840#respond" onclick="return addComment.moveForm( &quot;comment-840&quot;, &quot;840&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Blackhold">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-840 -->
+</li><!-- #comment-## -->
+<li class="wordpress even thread-even depth-1 social-comment social-clearfix social-wordpress" id="li-comment-841">
+<div class="social-comment-inner social-clearfix" id="comment-841">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/8c8795bf224ffdba367693909f6b8305" srcset="http://2.gravatar.com/avatar/8c8795bf224ffdba367693909f6b8305?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://hostinguff.com/" rel="external nofollow" class="url">eduardo acosta</a></cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-841" class="social-posted-when" target="_blank">26 setembre 2012</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>me quedo muy claro y muy explicado les agradesco muchas gracias</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=841#respond" onclick="return addComment.moveForm( &quot;comment-841&quot;, &quot;841&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a eduardo acosta">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-841 -->
+</li><!-- #comment-## -->
+<li class="wordpress odd alt thread-odd thread-alt depth-1 social-comment social-clearfix social-wordpress" id="li-comment-842">
+<div class="social-comment-inner social-clearfix" id="comment-842">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/saved_resource" srcset="http://2.gravatar.com/avatar/?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo avatar-default" height="40" width="40"><cite class="social-fn fn">Anònim</cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-842" class="social-posted-when" target="_blank">5 novembre 2012</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>Muchas Gracias, Muy util toda la información</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=842#respond" onclick="return addComment.moveForm( &quot;comment-842&quot;, &quot;842&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a ">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-842 -->
+</li><!-- #comment-## -->
+<li class="wordpress even thread-even depth-1 social-comment social-clearfix social-wordpress" id="li-comment-843">
+<div class="social-comment-inner social-clearfix" id="comment-843">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/saved_resource(1)" srcset="http://0.gravatar.com/avatar/?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo avatar-default" height="40" width="40"><cite class="social-fn fn">Usuario_moodle</cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-843" class="social-posted-when" target="_blank">5 novembre 2012</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>Hola, Se que ya con lo expuesto aqui esta uno mas que agradecido. Viendo lo mod_proxy entonces podria yo tener un servidor principal con moodle y otro con diferente ip(otro internet) en el cual se enviaran las tareas de alumnos; para asi aprovechar el ancho de banda de los dos internets?</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=843#respond" onclick="return addComment.moveForm( &quot;comment-843&quot;, &quot;843&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Usuario_moodle">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-843 -->
+<ul class="social-children">
+<li class="wordpress byuser comment-author-admin bypostauthor odd alt depth-2 social-comment social-clearfix social-wordpress" id="li-comment-844">
+<div class="social-comment-inner social-clearfix" id="comment-844">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/1471fdc10ed47b6c999ff353fea9d429" srcset="http://1.gravatar.com/avatar/1471fdc10ed47b6c999ff353fea9d429?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://www.nusepas.com/" rel="external nofollow" class="url">Blackhold</a></cite><span class="social-replied social-imr">replied:</span>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-844" class="social-posted-when" target="_blank">5 novembre 2012</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>efectivamente :)</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=844#respond" onclick="return addComment.moveForm( &quot;comment-844&quot;, &quot;844&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Blackhold">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-844 -->
+<ul class="social-children">
+<li class="wordpress even depth-3 social-comment social-clearfix social-wordpress" id="li-comment-846">
+<div class="social-comment-inner social-clearfix" id="comment-846">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/saved_resource(1)" srcset="http://1.gravatar.com/avatar/?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo avatar-default" height="40" width="40"><cite class="social-fn fn">Usuario_moodle</cite><span class="social-replied social-imr">replied:</span>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-846" class="social-posted-when" target="_blank">7 novembre 2012</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>Gracias!</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=846#respond" onclick="return addComment.moveForm( &quot;comment-846&quot;, &quot;846&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Usuario_moodle">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-846 -->
+</li><!-- #comment-## -->
+</ul>
+</li>
+<!-- #comment-## -->
+</ul>
+</li>
+<!-- #comment-## -->
+<li class="wordpress odd alt thread-odd thread-alt depth-1 social-comment social-clearfix social-wordpress" id="li-comment-847">
+<div class="social-comment-inner social-clearfix" id="comment-847">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/aa14a762e612a6074e0aa17d46c738ae" srcset="http://1.gravatar.com/avatar/aa14a762e612a6074e0aa17d46c738ae?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://utsupra.com/" rel="external nofollow" class="url">Diego Moretti</a></cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-847" class="social-posted-when" target="_blank">13 juny 2014</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>otro foco es la optimización de la base de datos, tablas, uso de índices, tamaño de tablas, eliminar escaneo completo en búsquedas con like y similares, etc, y la optimización extrema del peso de imágenes, además del uso de caché</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=847#respond" onclick="return addComment.moveForm( &quot;comment-847&quot;, &quot;847&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Diego Moretti">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-847 -->
+</li><!-- #comment-## -->
+<li class="wordpress even thread-even depth-1 social-comment social-clearfix social-wordpress" id="li-comment-848">
+<div class="social-comment-inner social-clearfix" id="comment-848">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/b8bc10c0a70602de5b883ee1112c7ff5" srcset="http://2.gravatar.com/avatar/b8bc10c0a70602de5b883ee1112c7ff5?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn"><a href="http://justchinchilling.com/" rel="external nofollow" class="url">Dan@KenSei</a></cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-848" class="social-posted-when" target="_blank">19 febrer 2015</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>Muy grande, tío. Estaba buscando algunas ideas sobre cómo optimizar mi server, pero no esperaba encontrarme tantas y tan bien ordenadas en un solo post. :)</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=848#respond" onclick="return addComment.moveForm( &quot;comment-848&quot;, &quot;848&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Dan@KenSei">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-848 -->
+</li><!-- #comment-## -->
+<li class="wordpress odd alt thread-odd thread-alt depth-1 social-comment social-clearfix social-wordpress" id="li-comment-252048">
+<div class="social-comment-inner social-clearfix" id="comment-252048">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/8931bf770c8277a23f00ad5fb89b0681" srcset="http://2.gravatar.com/avatar/8931bf770c8277a23f00ad5fb89b0681?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn">Alejandro</cite>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-252048" class="social-posted-when" target="_blank">7 months ago</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>Hola. Estás en México? Como puedo realizar una consulta?</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=252048#respond" onclick="return addComment.moveForm( &quot;comment-252048&quot;, &quot;252048&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a Alejandro">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-252048 -->
+<ul class="social-children">
+<li class="wordpress byuser comment-author-admin bypostauthor even depth-2 social-comment social-clearfix social-wordpress" id="li-comment-255466">
+<div class="social-comment-inner social-clearfix" id="comment-255466">
+	<div class="social-comment-header">
+		<div class="social-comment-author vcard">
+			<img alt="" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/1471fdc10ed47b6c999ff353fea9d429" srcset="http://1.gravatar.com/avatar/1471fdc10ed47b6c999ff353fea9d429?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"><cite class="social-fn fn">admin</cite><span class="social-replied social-imr">replied:</span>		</div>
+		<!-- .comment-author .vcard -->
+		<div class="social-comment-meta social-comment-meta-wordpress">
+			<span class="social-posted-from">
+								<span>View</span>
+							</span>
+			<a href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/#comment-255466" class="social-posted-when" target="_blank">7 months ago</a>
+		</div>
+	</div>
+	<div class="social-comment-body">
+				<p>no, no estoy en México…</p>
+	</div>
+			<div class="social-actions entry-meta">
+		<a rel="nofollow" class="comment-reply-link" href="http://blackhold.nusepas.com/2010/05/24/configurando-apache-para-la-guerra-alto-rendimiento/?replytocom=255466#respond" onclick="return addComment.moveForm( &quot;comment-255466&quot;, &quot;255466&quot;, &quot;respond&quot;, &quot;1545&quot; )" aria-label="Resposta a admin">Respon</a>	</div>
+		<!-- .reply -->
+</div><!-- #comment-255466 -->
+</li><!-- #comment-## -->
+</ul>
+</li>
+<!-- #comment-## -->
+				</ol>
+							</div>
+		</div>
+			</div>
+	<!-- #Comments Tabs -->
+	</div>
+
+			<nav2>
+				<p>« <a href="http://blackhold.nusepas.com/2010/05/23/graffitianalysis/" rel="prev">Graffitianalysis</a> • <a href="http://blackhold.nusepas.com/2010/05/25/porque-hitler-tuvo-tantos-seguidores/" rel="next">¿Porqué hitler tuvo tantos seguidores?</a> »</p>
+			</nav2>
+		</section>
+
+	
+		<aside>
+			<ul>
+			<li id="search-2" class="widget widget_search"><h2 class="widgettitle">Buscar en el blog</h2>					<form method="get" action="http://blackhold.nusepas.com/">
+						<label for="s">Search the site: </label>
+						<input type="text" id="s" name="s" size="8" value="">
+						<input type="submit" value="Search">
+					</form></li><li id="event-calendar" class="widget ec3_widget_cal"><h2 class="widgettitle">Event Calendar</h2><div id="wp-calendar">
+<table class="nav"><tbody><tr>
+	<td id="prev"><a id="ec3_prev" href="javascript:ec3.go_prev()">«&nbsp;abr.</a></td>
+	<td><img id="ec3_spinner" style="display:none" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/ec_load.gif" alt="spinner">
+	    <a id="ec3_publish" href="http://blackhold.nusepas.com/?ec3_ical" title="Subscribe to iCalendar.">
+	     <img src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/publish.gif" alt="iCalendar">
+	    </a>
+	</td>
+	<td id="next"><a id="ec3_next" href="javascript:ec3.go_next()">jul.&nbsp;»</a></td>
+</tr></tbody></table>
+<table id="ec3_2010_5">
+<caption><a href="http://blackhold.nusepas.com/?m=201005&amp;cat=10" title="View posts for maig 2010">maig 2010</a></caption>
+<thead><tr>
+	<th abbr="dilluns" scope="col" title="dilluns">dl.</th>
+	<th abbr="dimarts" scope="col" title="dimarts">dt.</th>
+	<th abbr="dimecres" scope="col" title="dimecres">dc.</th>
+	<th abbr="dijous" scope="col" title="dijous">dj.</th>
+	<th abbr="divendres" scope="col" title="divendres">dv.</th>
+	<th abbr="dissabte" scope="col" title="dissabte">ds.</th>
+	<th abbr="diumenge" scope="col" title="diumenge">dg.</th>
+</tr></thead>
+<tbody>
+	<tr><td colspan="5" class="pad">&nbsp;</td><td id="ec3_2010_5_1">1</td><td id="ec3_2010_5_2">2</td></tr>
+	<tr><td id="ec3_2010_5_3">3</td><td id="ec3_2010_5_4">4</td><td id="ec3_2010_5_5">5</td><td id="ec3_2010_5_6">6</td><td id="ec3_2010_5_7">7</td><td id="ec3_2010_5_8">8</td><td id="ec3_2010_5_9">9</td></tr>
+	<tr><td id="ec3_2010_5_10">10</td><td id="ec3_2010_5_11">11</td><td id="ec3_2010_5_12">12</td><td id="ec3_2010_5_13">13</td><td id="ec3_2010_5_14">14</td><td id="ec3_2010_5_15">15</td><td id="ec3_2010_5_16">16</td></tr>
+	<tr><td id="ec3_2010_5_17">17</td><td id="ec3_2010_5_18">18</td><td id="ec3_2010_5_19">19</td><td id="ec3_2010_5_20">20</td><td id="ec3_2010_5_21">21</td><td id="ec3_2010_5_22">22</td><td id="ec3_2010_5_23">23</td></tr>
+	<tr><td id="ec3_2010_5_24">24</td><td id="ec3_2010_5_25">25</td><td id="ec3_2010_5_26">26</td><td id="ec3_2010_5_27">27</td><td id="ec3_2010_5_28">28</td><td id="ec3_2010_5_29">29</td><td id="ec3_2010_5_30">30</td></tr>
+	<tr><td id="ec3_2010_5_31">31</td><td colspan="6" class="pad" style="vertical-align:bottom"><a href="http://blog.firetree.net/?ec3_version=3.1.4" title="Event Calendar 3.1.4"><span class="ec3_ec"><span>EC</span></span></a></td></tr>
+</tbody>
+</table><table id="ec3_2010_6">
+<caption><a href="http://blackhold.nusepas.com/?m=201006&amp;cat=10" title="View posts for juny 2010">juny 2010</a></caption>
+<thead><tr>
+	<th abbr="dilluns" scope="col" title="dilluns">dl.</th>
+	<th abbr="dimarts" scope="col" title="dimarts">dt.</th>
+	<th abbr="dimecres" scope="col" title="dimecres">dc.</th>
+	<th abbr="dijous" scope="col" title="dijous">dj.</th>
+	<th abbr="divendres" scope="col" title="divendres">dv.</th>
+	<th abbr="dissabte" scope="col" title="dissabte">ds.</th>
+	<th abbr="diumenge" scope="col" title="diumenge">dg.</th>
+</tr></thead>
+<tbody>
+	<tr><td colspan="1" class="pad">&nbsp;</td><td id="ec3_2010_6_1">1</td><td id="ec3_2010_6_2">2</td><td id="ec3_2010_6_3">3</td><td id="ec3_2010_6_4">4</td><td id="ec3_2010_6_5">5</td><td id="ec3_2010_6_6">6</td></tr>
+	<tr><td id="ec3_2010_6_7">7</td><td id="ec3_2010_6_8">8</td><td id="ec3_2010_6_9">9</td><td id="ec3_2010_6_10">10</td><td id="ec3_2010_6_11">11</td><td id="ec3_2010_6_12">12</td><td id="ec3_2010_6_13">13</td></tr>
+	<tr><td id="ec3_2010_6_14">14</td><td id="ec3_2010_6_15">15</td><td id="ec3_2010_6_16">16</td><td id="ec3_2010_6_17">17</td><td id="ec3_2010_6_18">18</td><td id="ec3_2010_6_19">19</td><td id="ec3_2010_6_20">20</td></tr>
+	<tr><td id="ec3_2010_6_21">21</td><td id="ec3_2010_6_22">22</td><td id="ec3_2010_6_23">23</td><td id="ec3_2010_6_24">24</td><td id="ec3_2010_6_25">25</td><td id="ec3_2010_6_26">26</td><td id="ec3_2010_6_27">27</td></tr>
+	<tr><td id="ec3_2010_6_28">28</td><td id="ec3_2010_6_29">29</td><td id="ec3_2010_6_30">30</td><td colspan="4" class="pad" style="vertical-align:bottom"><a href="http://blog.firetree.net/?ec3_version=3.1.4" title="Event Calendar 3.1.4"><span class="ec3_ec"><span>EC</span></span></a></td></tr>
+</tbody>
+</table></div>
+	<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/popup.js.descarga"></script>
+</li><li id="categories-3" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>		<ul>
+	<li class="cat-item cat-item-37"><a href="http://blackhold.nusepas.com/category/geek-girl/">[Geek-girl]</a> (11)
+</li>
+	<li class="cat-item cat-item-2"><a href="http://blackhold.nusepas.com/category/3d/">3D</a> (2)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://blackhold.nusepas.com/category/accesibilidad/">accesibilidad</a> (2)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://blackhold.nusepas.com/category/analogico/">Analógico</a> (72)
+<ul class="children">
+	<li class="cat-item cat-item-57"><a href="http://blackhold.nusepas.com/category/analogico/cocinitas/">Cocinitas</a> (3)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://blackhold.nusepas.com/category/android/">Android</a> (11)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://blackhold.nusepas.com/category/apple/">Apple</a> (2)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://blackhold.nusepas.com/category/blackhold/">Blackhold</a> (196)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://blackhold.nusepas.com/category/discordianismo/">Discordianismo</a> (11)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://blackhold.nusepas.com/category/draytek/">draytek</a> (6)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://blackhold.nusepas.com/category/events/" title="events">events</a> (9)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://blackhold.nusepas.com/category/fotografia/">Fotografia</a> (5)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://blackhold.nusepas.com/category/gadgets/">Gadgets</a> (31)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://blackhold.nusepas.com/category/geek/">Geek</a> (69)
+</li>
+	<li class="cat-item cat-item-14"><a href="http://blackhold.nusepas.com/category/general/">General</a> (7)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://blackhold.nusepas.com/category/google/">Google</a> (18)
+</li>
+	<li class="cat-item cat-item-16"><a href="http://blackhold.nusepas.com/category/guifi-net/">Guifi.net</a> (91)
+</li>
+	<li class="cat-item cat-item-17"><a href="http://blackhold.nusepas.com/category/hackerspaces/">Hackerspaces</a> (28)
+</li>
+	<li class="cat-item cat-item-18"><a href="http://blackhold.nusepas.com/category/hacktivism/">Hacktivism</a> (88)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://blackhold.nusepas.com/category/hasenfrosch/">HasenFrosch</a> (11)
+</li>
+	<li class="cat-item cat-item-20"><a href="http://blackhold.nusepas.com/category/humor/">Humor</a> (60)
+</li>
+	<li class="cat-item cat-item-21"><a href="http://blackhold.nusepas.com/category/internet/">Internet</a> (70)
+</li>
+	<li class="cat-item cat-item-22"><a href="http://blackhold.nusepas.com/category/jornadas/">Jornadas</a> (7)
+</li>
+	<li class="cat-item cat-item-23"><a href="http://blackhold.nusepas.com/category/linux/">Linux</a> (306)
+<ul class="children">
+	<li class="cat-item cat-item-39"><a href="http://blackhold.nusepas.com/category/linux/bash/" title="bash, sh, ksh y todos sus amigos">bash</a> (50)
+</li>
+	<li class="cat-item cat-item-40"><a href="http://blackhold.nusepas.com/category/linux/bbdd/" title="tablas... o no!">bbdd</a> (9)
+</li>
+	<li class="cat-item cat-item-41"><a href="http://blackhold.nusepas.com/category/linux/cms/" title="mediawiki, drupal, wordpress &amp; more">cms</a> (9)
+</li>
+	<li class="cat-item cat-item-42"><a href="http://blackhold.nusepas.com/category/linux/dns-dhcp/" title="dns y dhcp">dns-dhcp</a> (7)
+</li>
+	<li class="cat-item cat-item-43"><a href="http://blackhold.nusepas.com/category/linux/filesystems/">filesystems</a> (16)
+</li>
+	<li class="cat-item cat-item-44"><a href="http://blackhold.nusepas.com/category/linux/ftp/">ftp</a> (2)
+</li>
+	<li class="cat-item cat-item-45"><a href="http://blackhold.nusepas.com/category/linux/http/">http</a> (3)
+</li>
+	<li class="cat-item cat-item-46"><a href="http://blackhold.nusepas.com/category/linux/mensajeria-instantanea/" title="para hablar con los demás al momento">IM</a> (4)
+</li>
+	<li class="cat-item cat-item-24"><a href="http://blackhold.nusepas.com/category/linux/monitorizacion/">monitorización</a> (25)
+</li>
+	<li class="cat-item cat-item-29"><a href="http://blackhold.nusepas.com/category/linux/proxy/">proxy</a> (14)
+</li>
+	<li class="cat-item cat-item-30"><a href="http://blackhold.nusepas.com/category/linux/sbc/">SBC</a> (3)
+</li>
+	<li class="cat-item cat-item-32"><a href="http://blackhold.nusepas.com/category/linux/ssh/" title="el maravilloso mundo del ssh :)">ssh</a> (12)
+</li>
+	<li class="cat-item cat-item-33"><a href="http://blackhold.nusepas.com/category/linux/vim/">vim</a> (8)
+</li>
+	<li class="cat-item cat-item-34"><a href="http://blackhold.nusepas.com/category/linux/virtualizacion/">virtualización</a> (21)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-25"><a href="http://blackhold.nusepas.com/category/music/">Music</a> (147)
+</li>
+	<li class="cat-item cat-item-26"><a href="http://blackhold.nusepas.com/category/networking/" title="por donde pasan nuestros datos">Networking</a> (65)
+<ul class="children">
+	<li class="cat-item cat-item-47"><a href="http://blackhold.nusepas.com/category/networking/ipv6/">IPv6</a> (8)
+</li>
+	<li class="cat-item cat-item-48"><a href="http://blackhold.nusepas.com/category/networking/mikrotik/">Mikrotik</a> (15)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-27"><a href="http://blackhold.nusepas.com/category/opensource/">Opensource</a> (57)
+<ul class="children">
+	<li class="cat-item cat-item-38"><a href="http://blackhold.nusepas.com/category/opensource/alfresco/">Alfresco</a> (2)
+</li>
+	<li class="cat-item cat-item-49"><a href="http://blackhold.nusepas.com/category/opensource/odoo/">Odoo</a> (1)
+</li>
+	<li class="cat-item cat-item-58"><a href="http://blackhold.nusepas.com/category/opensource/tiqueting/">Ticketing</a> (6)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-28"><a href="http://blackhold.nusepas.com/category/programacion/">Programación</a> (10)
+</li>
+	<li class="cat-item cat-item-31"><a href="http://blackhold.nusepas.com/category/scg/">SCG</a> (13)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://blackhold.nusepas.com/category/uncategorized/">Uncategorized</a> (1)
+</li>
+	<li class="cat-item cat-item-35"><a href="http://blackhold.nusepas.com/category/wordpress/">wordpress</a> (11)
+</li>
+		</ul>
+</li><li id="discordian_date-2" class="widget discordian_date"><div class="discordian_date" style="width:100%;text-align:left;font-size:12px;line-height:16px;padding-top:40px;padding-bottom:40px;">Today is Boomtime,<br>the 50th day of The Aftermath,<br>in the YOLD 3182. Celebrate Afflux.</div></li>			</ul>
+		</aside>
+		<footer>
+			<p><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY:SA</a> 2016 <a href="http://blackhold.nusepas.com/" title="Blackhold">Blackhold</a> • <a href="http://monzilla.biz/" title="WordPress Theme Design">H5 Theme</a> • <a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform">WordPress 4.7</a> • <a href="http://blackhold.nusepas.com/feed/" title="Subscribe to Posts Feed">Entries (RSS)</a> • <a href="http://blackhold.nusepas.com/comments/feed/" title="Subscribe to Comments Feed">Comments (RSS)</a></p>
+		</footer>
+<h5><!-- begin visitor maps  -->
+<script type="text/javascript">
+//<![CDATA[
+function wo_map_console(url) {
+  window.open(url,"wo_map_console","height=650,width=800,toolbar=no,statusbar=no,scrollbars=yes").focus();
+}
+//]]>
+</script>
+<!-- end visitor maps -->
+	<div style="display:none">
+	</div>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/form.js.descarga"></script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/devicepx-jetpack.js.descarga"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var Sociali18n = {"commentReplyTitle":"Post a Reply"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/social.js.descarga"></script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/gprofiles.js.descarga"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/wpgroho.js.descarga"></script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/wp-embed.min.js.descarga"></script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/e-201649.js.descarga" async="" defer=""></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.4.2',blog:'9799399',post:'1545',tz:'1',srv:'blackhold.nusepas.com'} ]);
+	_stq.push([ 'clickTrackerInit', '9799399', '1545' ]);
+</script>
+</h5>
+	
+
+<script type="text/javascript">
+_qoptions={
+qacct:"p-61n9PJFWpIhqM"
+};
+</script>
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/quant.js.descarga"></script>
+
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stats.marsupi.org/" : "http://stats.marsupi.org/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/piwik.js.descarga" type="text/javascript"></script><img src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/g.gif" alt=":)" width="6" height="5" id="wpstats"><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript>&lt;p&gt;&lt;img src="http://stats.marsupi.org/piwik.php?idsite=2" style="border:0" alt="" /&gt;&lt;/p&gt;</noscript>
+<!-- End Piwik Tag -->
+
+<div class="fixme" onmouseover="this.fade(0);" onmouseout="this.fade(1);"> 
+<a href="https://capa8.net/" target="_blank"><img alt="guy fawkes" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/icon-guy-fawkes.png"></a> 
+</div>
+
+<script type="text/javascript" src="./Configurando apache para la guerra (alto rendimiento) _ Blackhold_files/moo.js.descarga"></script> 
+<script type="text/javascript"> 
+ if (top.location != location) {
+  top.location.href = document.location.href;};
+  document.getElementsByName('query')[0].focus();
+</script> 
+
+
+
+<!-- Dynamic page generated in 0.228 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2016-12-07 15:13:00 -->
+
+<!-- super cache --><table id="ec3_popup" class="ec3_popup" style="display: none;"><tbody><tr><td id="ec3_shadow0" rowspan="2"><div></div></td><td><table></table></td><td id="ec3_shadow2" rowspan="2"><div></div></td></tr><tr><td id="ec3_shadow1"></td></tr></tbody></table></body></html>

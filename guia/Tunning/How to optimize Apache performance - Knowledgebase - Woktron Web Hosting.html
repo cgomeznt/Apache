@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<!-- saved from url=(0087)http://www.woktron.com/secure/knowledgebase/133/How-to-optimize-Apache-performance.html -->
+<html lang="en" slick-uniqueid="4"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to optimize Apache performance - Knowledgebase - Woktron Web Hosting</title>
+<link rel="stylesheet" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/grid-responsive.css" type="text/css">
+<link rel="stylesheet" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/master-gecko.css" type="text/css">
+<link rel="stylesheet" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/mediaqueries.css" type="text/css">
+<link rel="stylesheet" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/menu-template.css" type="text/css">
+<link rel="stylesheet" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/tmpl.css" type="text/css">
+<script type="text/javascript" async="" defer="" src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/piwik.js.descarga"></script><script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/mootools-core.js.descarga" type="text/javascript"></script>
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/core.js.descarga" type="text/javascript"></script>
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/caption.js.descarga" type="text/javascript"></script>
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/tmpl.js.descarga" type="text/javascript"></script>
+
+
+    <!-- Bootstrap -->
+<link href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/bootstrap.min.css" rel="stylesheet">
+<link href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/font-awesome.min.css" rel="stylesheet">
+
+<!-- Styling -->
+<link href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/overrides.css" rel="stylesheet">
+<link href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/styles.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/jquery.min.js.descarga"></script>
+
+<!-- Custom Styling -->
+<link rel="stylesheet" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/custom.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+<script type="text/javascript">jQuery.noConflict();</script>
+<script>
+((function($){
+
+var scrollingHeader = function(){
+	var body = $(document.body);
+	var scroll = body.getScroll();
+
+	if(scroll.y > 0 && body.id !== 'rt-offline' && body.id !== 'rt-comingsoon') body.addClass('scrolling-enable');
+	if(scroll.y == 0 && body.hasClass('scrolling-enable')) body.removeClass('scrolling-enable');
+};
+
+window.addEvent('scroll', scrollingHeader);
+
+})(jQuery);
+</script>
+
+    <script>
+                    ( function(jQuery) {
+                        jQuery(document).ready(function() {
+                            jQuery('ul.dropdown-menu li a').each(function( index ) {
+                                if(jQuery(this).attr('href') == 'clientarea.php?action=domains' || jQuery(this).attr('href').indexOf('clientarea.php?action=domains') > 0){ 
+                                    jQuery(this).parent().after('<li><a href="clientarea.php?managedns">Manage DNS</a></li>');
+                                }
+                            }); 
+                        });
+                    } ) ( jQuery );
+                    </script>
+
+
+<script charset="utf-8" class="lazyload" src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/resource.php"></script><link charset="utf-8" class="lazyload" href="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/resource(1).php" rel="stylesheet" type="text/css"></head>
+
+<body class="logo-type-paradigm header-overlay-dark header-type-customheader scrolling-fixed-header-enable scrolling-overlay-light utility-overlay-dark feature-overlay-light feature-type-preset3 maintop-overlay-light main-body-overlay-light mainbottom-overlay-light extension-overlay-dark extension-type-paradigm footer-overlay-dark font-family-paradigm font-size-is-small menu-type-dropdownmenu menu-dropdownmenu-position-header-b layout-mode-responsive col12 option-com-content menu-web-hosting scrolling-enable">
+	<div id="rt-page-surround">
+				<header id="rt-header-surround">
+			<div class="rt-overlay">
+								<div id="rt-header">
+					<div class="rt-container">
+						<div class="rt-grid-2 rt-alpha">
+            <div class="rt-logo-block">
+            <a href="http://www.woktron.com/" id="rt-logo"></a>
+        </div> 
+</div>
+<div class="rt-grid-10 rt-omega"><div class="menu-block"><div class="gf-menu-device-container responsive-type-panel"></div><ul class="gf-menu l1"><li class="item101 active last"><a class="item" <a="" href="http://www.woktron.com/">Home</a><span class="dropdown-spacer"></span><div class="dropdown columns-1" style="width:138px;"><div class="column col1" style="width:138px;"><ul class="l2"><li class="modules"><div class="module-content"><div class="mod-languages"><ul class="lang-inline"><li class="lang-active" dir="ltr"><a href="http://www.woktron.com/secure/knowledgebase.php?language=English"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/en.gif" alt="English (UK)" title="English (UK)"> &nbsp; &nbsp;</a></li><li class="" dir="ltr"><a href="http://www.woktron.com/secure/knowledgebase.php?language=Dutch"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/nl.gif" alt="Nederlands (NL)" title="Nederlands (NL)"> &nbsp; &nbsp;</a></li><li class="" dir="ltr"><a href="http://www.woktron.com/secure/knowledgebase.php?language=French"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/fr.gif" alt="Français (FR)" title="Français (FR)"></a></li></ul></div></div></li></ul></div></div></li><li class="item142 parent grouped"><a class="item" href="javascript:void(0);">Products</a><span class="dropdown-spacer"></span><div class="dropdown columns-3" style="width:489px;"><div class="column col1" style="width:173px;"><ul class="l2"><li class="item154 parent grouped"><a class="item" href="javascript:void(0);">HOSTING</a><span class="dropdown-spacer"></span><ol class="type-module"><li class="modules"><div class="module-content"><div class="custom"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/hosting.png"></div></div></li></ol></li><li class="item143"><a class="item" <a="" href="http://www.woktron.com/products/webhosting">Web Hosting</a></li><li class="item144"><a class="item" <a="" href="http://www.woktron.com/products/enterprise-hosting">Enterprise Hosting</a></li><li class="item145"><a class="item" <a="" href="http://www.woktron.com/products/reseller-hosting">Reseller Hosting</a></li><li class="item146"><a class="item subtext" <a="" href="http://www.woktron.com/products/vps">KVM VPS<em>Semi-Dedicated</em></a></li></ul></div><div class="column col2" style="width:143px;"><ul class="l2"><li class="item155 parent grouped"><a class="item" href="javascript:void(0);">DEDICATED
+</a><span class="dropdown-spacer"></span><ol class=" type-module"><li class="modules"><div class="module-content"><div class="custom"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/dedicated.png"></div></div></li></ol></li><li class="item158"><a class="item" <a="" href="http://www.woktron.com/products/netherlands">Netherlands</a></li><li class="item159"><a class="item" <a="" href="http://www.woktron.com/products/france">France</a></li><li class="item166"><a class="item" <a="" href="http://www.woktron.com/products/united-states">United States</a></li></ul></div><div class="column col3" style="width:173px;"><ul class="l2"><li class="item147 parent grouped"><a class="item" href="javascript:void(0);">SERVICES</a><span class="dropdown-spacer"></span><ol class=" type-module"><li class="modules"><div class="module-content"><div class="custom"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/services.png"></div></div></li></ol></li><li class="item148"><a class="item" <a="" href="http://www.woktron.com/secure/knowledgebase/133/domainchecker.php?language=English&amp;currency=1">Domain Names</a></li><li class="item149"><a class="item" <a="" href="http://www.woktron.com/products/ssl-certificates">SSL Certificates</a></li><li class="item167"><a class="item" href="http://www.woktron.com/products/server-management">Server Management</a></li><li class="item563"><a class="item" <a="" href="http://www.woktron.com/products/webdesign">Web Design</a></li></ul></div></div></li><li class="item153 parent"><a class="item" href="javascript:void(0);">Support</a><span class="dropdown-spacer"></span><div class="dropdown columns-1" style="width:180px;"><div class="column col1" style="width:180px;"><ul class="l2"><li class="item405 parent grouped"><a class="item" href="javascript:void(0);">SUPPORT</a><span class="dropdown-spacer"></span><ol class="type-module"><li class="modules"><div class="module-content"><div class="custom"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/support.png"></div></div></li></ol></li><li class="item156"><a class="item" <a="" href="http://www.woktron.com/secure/knowledgebase.php?language=English">Knowledgebase</a></li><li class="item160"><a class="item" <a="" href="http://www.woktron.com/support/terms-of-service">Terms of Service</a></li><li class="item161"><a class="item" <a="" href="http://www.woktron.com/support/privacy-policy">Privacy Policy</a></li><li class="item165"><a class="item" <a="" href="http://www.woktron.com/support/contact">Contact</a></li></ul></div></div></li><li class="item152 parent grouped"><a class="item" <a="" href="http://www.woktron.com/about">ABOUT</a><span class="dropdown-spacer"></span><div class="dropdown columns-1" style="width:187px;"><div class="column col1" style="width:187px;"><ul class="l2"><li class="item406 parent grouped"><a class="item" href="javascript:void(0);">ABOUT US</a><span class="dropdown-spacer"></span><ol class=" type-module"><li class="modules"><div class="module-content"><div class="custom"><img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/about.png"></div></div></li></ol></li><li class="item320"><a class="item" href="http://www.woktron.com/about/service-level-agreement-sla">Service Level Agreement</a></li><li class="item169"><a class="item" <a="" href="http://www.woktron.com/about/datacenters">Data Centers</a></li><li class="item168"><a class="item" <a="" href="http://www.woktron.com/about/partners">Partners</a></li><li class="item157"><a class="item" <a="" href="http://www.woktron.com/about/blog">Blog</a></li></ul></div></div></li><li class="item150"><a class="item" <a="" href="http://www.woktron.com/secure/clientarea.php?language=English">Clients</a></li></ul>
+																																							<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+	
+</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+												<div id="rt-showcase">
+					<div class="rt-container">
+						<div class="rt-grid-12 rt-alpha rt-omega">
+     			            <div class="rt-block rt-big-title rt-center nopaddingbottom nomarginbottom">
+           	<div class="module-surround">
+	           		                	<div class="module-content">
+	                		
+
+<div class="customrt-big-title rt-center nopaddingbottom nomarginbottom">
+	<center><div class="module-title">
+	<h1 class="title">Client Panel</h1>
+</div></center></div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+												<div id="rt-drawer">
+					<div class="rt-container">
+												<div class="clear"></div>
+					</div>
+				</div>
+															</div>
+		</header>
+
+
+
+<section id="main-menu">
+    <nav id="nav" class="navbar navbar-default navbar-main" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav">
+
+                        <li menuitemname="Home" id="Primary_Navbar-Home">
+        <a href="http://www.woktron.com/secure/index.php">
+                        Home
+                                </a>
+            </li>
+    <li menuitemname="Announcements" id="Primary_Navbar-Announcements">
+        <a href="http://www.woktron.com/secure/announcements.php">
+                        Announcements
+                                </a>
+            </li>
+    <li menuitemname="Knowledgebase" id="Primary_Navbar-Knowledgebase">
+        <a href="http://www.woktron.com/secure/knowledgebase.php">
+                        Knowledgebase
+                                </a>
+            </li>
+    <li menuitemname="Network Status" id="Primary_Navbar-Network_Status">
+        <a href="http://www.woktron.com/secure/serverstatus.php">
+                        Network Status
+                                </a>
+            </li>
+    <li menuitemname="Contact Us" id="Primary_Navbar-Contact_Us">
+        <a href="http://www.woktron.com/secure/contact.php">
+                        Contact Us
+                                </a>
+            </li>
+
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                        <li menuitemname="Account" class="dropdown" id="Secondary_Navbar-Account">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="http://www.woktron.com/secure/knowledgebase/133/How-to-optimize-Apache-performance.html#">
+                        Account
+                        &nbsp;<b class="caret"></b>        </a>
+                    <ul class="dropdown-menu">
+                            <li menuitemname="Login" id="Secondary_Navbar-Account-Login">
+                    <a href="http://www.woktron.com/secure/clientarea.php">
+                                                Login
+                                            </a>
+                </li>
+                            <li menuitemname="Divider" class="nav-divider" id="Secondary_Navbar-Account-Divider">
+                    <a href="http://www.woktron.com/secure/knowledgebase/133/How-to-optimize-Apache-performance.html">
+                                                -----
+                                            </a>
+                </li>
+                            <li menuitemname="Forgot Password?" id="Secondary_Navbar-Account-Forgot_Password?">
+                    <a href="http://www.woktron.com/secure/pwreset.php">
+                                                Forgot Password?
+                                            </a>
+                </li>
+                        </ul>
+            </li>
+
+
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+</section>
+
+
+
+
+<section id="header">
+    <div class="container">
+
+        <!-- Top Bar -->
+        <div id="top-nav">
+
+            <!-- Login/Account Notifications -->
+                            <div class="pull-right nav">
+                    <a href="http://www.woktron.com/secure/knowledgebase/133/How-to-optimize-Apache-performance.html#" class="quick-nav" data-toggle="popover" id="loginOrRegister" data-placement="bottom" data-original-title="" title=""><i class="fa fa-user"></i> Login</a>
+                    <div id="loginOrRegisterContent" class="hidden">
+                        <form action="https://www.woktron.com/secure/dologin.php" method="post" role="form">
+<input type="hidden" name="token" value="1d1556eee835d1ae3cec287f1d601a81ac860505">
+                            <div class="form-group">
+                                <input type="email" name="username" class="form-control" placeholder="Email Address" required="">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required="">
+                                    <span class="input-group-btn">
+                                        <input type="submit" class="btn btn-primary" value="Login">
+                                    </span>
+                                </div>
+                            </div>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="rememberme"> Remember Me • <a href="http://www.woktron.com/secure/pwreset.php">Forgot Password?</a>
+                            </label>
+                        </form>
+                                            </div>
+                </div>
+                        <!-- Shopping Cart -->
+            <div class="pull-right nav">
+                <a href="http://www.woktron.com/secure/cart.php?a=view" class="quick-nav"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">View Cart (</span><span id="cartItemCount">0</span><span class="hidden-xs">)</span></a>
+            </div>
+
+            
+        </div>
+
+
+    </div>
+</section>
+
+<section id="main-body" class="container">
+
+    <div class="row">
+                                    <div class="col-md-9 pull-md-right">
+                    <div class="header-lined">
+    <h1>Knowledgebase</h1>
+    <ol class="breadcrumb">
+            <li>
+            <a href="http://www.woktron.com/secure/index.php">            Portal Home
+            </a>        </li>
+            <li>
+            <a href="http://www.woktron.com/secure/knowledgebase.php">            Knowledgebase
+            </a>        </li>
+            <li>
+            <a href="http://www.woktron.com/secure/knowledgebase/16/VPS-Accounts">            VPS Accounts
+            </a>        </li>
+            <li class="active">
+                        How to optimize Apache performance
+                    </li>
+    </ol>
+</div>
+
+                </div>
+                        <div class="col-md-3 pull-md-left sidebar">
+                    <div menuitemname="Support Knowledgebase Categories" class="panel panel-default hidden-sm hidden-xs">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-info"></i>&nbsp;                Categories
+                            </h3>
+        </div>
+                            <div class="list-group">
+                                                            <a menuitemname="Support Knowledgebase Category 10" href="http://www.woktron.com/secure/knowledgebase/10/Billing-and-Accounts" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_10">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            Billing and Accounts
+                            &nbsp;<span class="badge">20</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 8" href="http://www.woktron.com/secure/knowledgebase/8/Dedicated-Servers" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_8">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            Dedicated Servers
+                            &nbsp;<span class="badge">21</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 1" href="http://www.woktron.com/secure/knowledgebase/1/DirectAdmin" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_1">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            DirectAdmin
+                            &nbsp;<span class="badge">20</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 9" href="http://www.woktron.com/secure/knowledgebase/9/Domains-and-DNS" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_9">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            Domains and DNS
+                            &nbsp;<span class="badge">32</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 2" href="http://www.woktron.com/secure/knowledgebase/2/E-Mail" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_2">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            E-Mail
+                            &nbsp;<span class="badge">19</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 4" href="http://www.woktron.com/secure/knowledgebase/4/FTP" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_4">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            FTP
+                            &nbsp;<span class="badge">6</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 7" href="http://www.woktron.com/secure/knowledgebase/7/HTML-PHP-MySQL" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_7">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            HTML, PHP, MySQL
+                            &nbsp;<span class="badge">11</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 12" href="http://www.woktron.com/secure/knowledgebase/12/Installable-Scripts" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_12">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            Installable Scripts
+                            &nbsp;<span class="badge">10</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 28" href="http://www.woktron.com/secure/knowledgebase/28/Pre-Sales-Info" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_28">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            Pre-Sales Info
+                            &nbsp;<span class="badge">6</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 20" href="http://www.woktron.com/secure/knowledgebase/20/Reseller-Hosting" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_20">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            Reseller Hosting
+                            &nbsp;<span class="badge">8</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 11" href="http://www.woktron.com/secure/knowledgebase/11/SSL-Certificates" class="list-group-item" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_11">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            SSL Certificates
+                            &nbsp;<span class="badge">35</span>                        </a>
+                                                                                <a menuitemname="Support Knowledgebase Category 16" href="http://www.woktron.com/secure/knowledgebase/16/VPS-Accounts" class="list-group-item active" id="Primary_Sidebar-Support_Knowledgebase_Categories-Support_Knowledgebase_Category_16">
+                            <i class="fa fa-info-circle"></i>&nbsp;                            VPS Accounts
+                            &nbsp;<span class="badge">25</span>                        </a>
+                                                </div>
+                    </div>
+            
+        <div class="panel hidden-lg hidden-md panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-info"></i>&nbsp;                    Categories
+                                    </h3>
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <select class="form-control" onchange="selectChangeNavigate(this)">
+                                                    <option menuitemname="Support Knowledgebase Category 10" value="http://www.woktron.com/secure/knowledgebase/10/Billing-and-Accounts" class="list-group-item">
+                                Billing and Accounts
+                                (20)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 8" value="http://www.woktron.com/secure/knowledgebase/8/Dedicated-Servers" class="list-group-item">
+                                Dedicated Servers
+                                (21)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 1" value="http://www.woktron.com/secure/knowledgebase/1/DirectAdmin" class="list-group-item">
+                                DirectAdmin
+                                (20)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 9" value="http://www.woktron.com/secure/knowledgebase/9/Domains-and-DNS" class="list-group-item">
+                                Domains and DNS
+                                (32)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 2" value="http://www.woktron.com/secure/knowledgebase/2/E-Mail" class="list-group-item">
+                                E-Mail
+                                (19)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 4" value="http://www.woktron.com/secure/knowledgebase/4/FTP" class="list-group-item">
+                                FTP
+                                (6)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 7" value="http://www.woktron.com/secure/knowledgebase/7/HTML-PHP-MySQL" class="list-group-item">
+                                HTML, PHP, MySQL
+                                (11)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 12" value="http://www.woktron.com/secure/knowledgebase/12/Installable-Scripts" class="list-group-item">
+                                Installable Scripts
+                                (10)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 28" value="http://www.woktron.com/secure/knowledgebase/28/Pre-Sales-Info" class="list-group-item">
+                                Pre-Sales Info
+                                (6)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 20" value="http://www.woktron.com/secure/knowledgebase/20/Reseller-Hosting" class="list-group-item">
+                                Reseller Hosting
+                                (8)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 11" value="http://www.woktron.com/secure/knowledgebase/11/SSL-Certificates" class="list-group-item">
+                                SSL Certificates
+                                (35)                            </option>
+                                                    <option menuitemname="Support Knowledgebase Category 16" value="http://www.woktron.com/secure/knowledgebase/16/VPS-Accounts" class="list-group-item" selected="selected">
+                                VPS Accounts
+                                (25)                            </option>
+                                            </select>
+                </form>
+            </div>
+                    </div>
+    
+            </div>
+                <!-- Container for main page display content -->
+        <div class="col-md-9 pull-md-right main-content">
+            
+
+<h2>How to optimize Apache performance</h2>
+
+
+<blockquote>
+    <br>
+<p>Squeezing the most performance out of your Apache server can make difference in how your Web site functions and the impression it makes. Even fractions of a second matter, especially on dynamic sites.</p>
+<br>
+<h2>Selecting the correct MPM</h2>
+<p>Apache is modular in that you can add and remove features easily. Multi-Processing Modules (MPMs) provide this modular functionality at the core of Apache -- managing the network connections and dispatching the requests. MPMs let you use threads or even move Apache to a different operating system.</p>
+<p>Only one MPM can be active at one time, and it must be compiled in statically with <code>--with-mpm=(worker|prefork|event)</code>.</p>
+<br>
+<p>The traditional model of one process per request is called <strong>prefork</strong>. A newer, threaded, model is called <strong>worker</strong>, which uses multiple processes, each with multiple threads to get better performance with lower overhead. The final, <strong>event</strong> MPM is a module that keeps separate pools of threads for different tasks. To determine which MPM you're currently using, execute <code>httpd -l</code></p>
+<br>
+<p>Choosing the correct MPM to use depends on many factors. On the surface, threading sounds better than forking, if all the underlying modules are thread safe, including all the libraries used by PHP. Prefork is the safer choice; you should do careful testing if you choose worker. The performance gains also depend on the libraries that come with your distribution and your hardware.</p>
+<ul>
+<li><strong>The worker MPM</strong> uses multiple child processes with many threads each. Each thread handles one connection at a time. Worker generally is a good choice for high-traffic servers because it has a smaller memory footprint than the prefork MPM.</li>
+<li><strong>The event MPM</strong> is threaded like the Worker MPM, but is designed to allow more requests to be served simultaneously by passing off some processing work to supporting threads, freeing up the main threads to work on new requests.</li>
+<li><strong>The prefork MPM</strong> uses multiple child processes with one thread each. Each process handles one connection at a time. On many systems, prefork is comparable in speed to worker, but it uses more memory. Prefork's threadless design has advantages over worker in some situations: it can be used with non-thread-safe third-party modules, and it is easier to debug on platforms with poor thread debugging support.</li>
+</ul>
+<p>Regardless of which MPM you choose, you must configure it appropriately. In general, configuring an MPM involves telling Apache how to control how many workers are running, whether they're threads or processes.</p>
+<p>From Apache 2.2 Prefork is the default MPM. The important configuration options for the prefork MPM are shown below.</p>
+<br>
+<h2>Apache.conf</h2>
+<p>To start, open the Apache configuration file and locate the directives section:</p>
+<p>On a DirectAdmin based server it will be located in: <code>/etc/httpd/conf/extra/httpd-mpm.conf</code><br>On a cPanel server, it will be located in <code>/usr/local/apache/conf/</code><br>On a Plesk server, it will be in <code>/etc/httpd/conf/</code></p>
+<p>If you are using nano, vi or vim: once you open the file, you can find the directives by scrolling through the file. Using VI or VIM you can also search by typing forward-slash ‘/’ and typing the exact string that you are looking for (search is case specific).</p>
+<br>
+<h3>Timeout</h3>
+<hr>
+<p>The Timeout setting is the number of seconds before data "sends" or "receives" (to or from the client) time out. Having this set to a high number forces site visitors to "wait in line" which adds extra load to the server. Lowering the ‘Timeout’ value too much will cause a long running script to terminate earlier than expected.</p>
+<p>A reasonable value is <strong>100</strong> for Virtual Private Servers, or heavily loaded dedicated servers. For Dedicated Servers under normal load the default value of <strong>300</strong> is sufficient.</p>
+<br>
+<h3>KeepAlive</h3>
+<hr>
+<p>KeepAlive enables persistent connections on the web server. This setting should be <strong>On</strong> unless the server is getting requests from hundreds of IPs at once. High volume and/or load balanced servers should have this setting disabled <strong>Off</strong> to increase connection throughput.</p>
+<p>When using DirectAdmin, this directive can be found in: <code>/etc/httpd/conf/extra/httpd-default.conf</code></p>
+<br>
+<h3>MaxKeepAliveRequests</h3>
+<hr>
+<p>This setting limits the number of requests allowed per persistent connection when KeepAlive is on. If it is set to 0, unlimited requests will be allowed. When using DirectAdmin, this directive can be found in: <code>/etc/httpd/conf/extra/httpd-default.conf</code></p>
+<p>It is recommended to keep this value at <strong>100</strong> for virtualized accounts like VPS accounts. On dedicated servers it is recommended that this value be modified to <strong>150</strong>.</p>
+<br>
+<h3>KeepAliveTimeout</h3>
+<hr>
+<p>The number of seconds Apache will wait for another request before closing the connection. Setting this to a high value may cause performance problems in heavily loaded servers. The higher the timeout, the more server processes will be kept occupied waiting on connections with idle clients. When using DirectAdmin, this directive can be found in: <code>/etc/httpd/conf/extra/httpd-default.conf</code></p>
+<p>The default value of <strong>10</strong> seconds is a good value for average server performance. This value should be kept low as the socket will be idle for extended periods otherwise.It is recommended that this value be lowered to <strong>5</strong> on servers under heavy load.</p>
+<br>
+<h3>StartServers</h3>
+<hr>
+<p>sets the number of child server processes created on startup. As the number of processes is dynamically controlled depending on the load there is usually little reason to adjust this parameter.</p>
+<p>This value should mirror what is set in MinSpareServers.</p>
+<br>
+<h3>MinSpareServers</h3>
+<hr>
+<p>Sets the desired minimum number of idle child server processes. An idle process is one which is not handling a request. If there are fewer spareservers idle then specified by this value, then the parent process creates new children at a maximum rate of 1 per second. Setting this parameter to a large number is almost always a bad idea.</p>
+<p>Woktron recommends adjusting the value for this setting to the following:</p>
+<ul>
+<li>Virtual Private Server <strong>5</strong></li>
+<li>Dedicated server with 1-2GB RAM <strong>10</strong></li>
+<li>Dedicated server with 2-4GB RAM <strong>20</strong></li>
+<li>Dedicated server with 4+ GB RAM <strong>25</strong></li>
+</ul>
+<br>
+<h3>MaxSpareServers</h3>
+<hr>
+<p>sets the desired maximum number of idle child server processes. An idle process is one which is not handling a request. If there are more than MaxSpareServers idle, then the parent process will kill off the excess processes.</p>
+<br>
+<h3>ServerLimit</h3>
+<hr>
+<p>is only used if you need to set MaxClients higher than 256 (default). Do not set the value of this directive any higher than what you might want to set MaxClients to.</p>
+<br>
+<h3>MaxClients</h3>
+<hr>
+<p>sets the limit on the number of simultaneous requests that will be served. Any connection attempts over the MaxClients limit will normally be queued, up to a number based on the ListenBacklog directive. Once a child process is freed at the end of a different request, the connection will then be serviced.</p>
+<p>For non-threaded servers (i.e., prefork), MaxClients translates into the maximum number of child processes that will be launched to serve requests. The default value is <strong>256</strong>; to increase it, you must also raise ServerLimit. this and ServerLimit should be the same or very close with MaxClients never exceeding ServerLimit. For servers under high load this value should be increased. See below for more information on how to define the maxclients directive.</p>
+<br>
+<h4>How to define the MaxClients directive</h4>
+<p>A simple calculation for MaxClients would be: <strong>(Total Memory – Critical Services Memory) / Size Per Apache process</strong></p>
+<p>I define Critical Services as services such as mySQL, Plesk, DirectAdmin; any service that is required for proper operation of your server.</p>
+<p>I’ve used the following commands via shell to determine values for Total Memory, OS Memory, MySQL Memory, and Apache Process Size</p>
+<pre>TOTAL MEMORY
+[root@vps httpd]# free -m
+total       used       free     shared    buffers     cached
+Mem:          1002        599        402          0         28        337
+-/+ buffers/cache:        233        769
+Swap:         2047        124       1922
+
+MYSQL MEMORY
+[root@vps httpd]# ps aux | grep ‘mysql’ | awk ‘{print $6}’
+408
+21440
+704
+
+APACHE PROCESS SIZE
+[root@vps httpd]# ps aux | grep ‘httpd’ | awk ‘{print $6}’
+22468
+11552
+41492
+40868
+41120
+41696
+39488
+41704
+15552
+16076
+16084
+728</pre>
+<br>
+<p>In this case the server has 1002Mb of memory allocated, xx used by the OS itself, 21Mb used by mySQL, and each Apache thread averages about 30Mb. <strong>MaxClients = (1002 – 21) / 30</strong> therefore MaxClients = <strong>32.7</strong></p>
+<br>
+<h3>MaxConnectionsPerChild</h3>
+<hr>
+<p>MaxConnectionsPerChild sets the limit on the number of connections that an individual child server process will handle. After MaxConnectionsPerChild connections, the child process will die. If MaxConnectionsPerChild is 0, then the process will never expire.</p>
+<p>Setting MaxConnectionsPerChild to a non-zero value limits the amount of memory that process can consume by (accidental) memory leakage. See below for more information.</p>
+<br>
+<h4>How to define the MaxConnectionsPerChild directive</h4>
+<p>A good calculation for MaxConnectionsPerChild would be: <strong>(total amount of daily requests / total number of daily processes)</strong></p>
+<p>Determining these values is a bit more complex as it requires some type of statistics package or thorough knowledge of interpreting Apache access logs.</p>
+<p>As this does not adversely effect memory usage, only cpu time to cycle the process if you are unable to determine this information the standard 1000 should be used.</p>
+<br>
+<p>Thus a good configuration for this server would be:</p>
+<pre>StartServers       2
+MinSpareServers    3
+MaxSpareServers    3
+ServerLimit       30
+MaxClients        30
+MaxRequestsPerChild  1000
+</pre>
+<br>
+<p>Be sure once you’ve saved the file to perform a configuration test before restarting Apache.</p>
+<pre>[root@vps httpd]# service httpd configtest
+Syntax OK</pre>
+<pre>[root@vps httpd]# service httpd restart
+Stopping httpd:                                            [  OK  ]
+Starting httpd:                                            [  OK  ]</pre>
+</blockquote>
+<div class="hidden-print">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Was this answer helpful?            </h3>
+        </div>
+        <div class="panel-body">
+                            <form action="http://www.woktron.com/secure/knowledgebase/133/How-to-optimize-Apache-performance.html" method="post">
+<input type="hidden" name="token" value="1d1556eee835d1ae3cec287f1d601a81ac860505">
+                    <input type="hidden" name="useful" value="vote">
+                    <button type="submit" name="vote" value="yes" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i> Yes</button>
+                    <button type="submit" name="vote" value="no" class="btn btn-default"><i class="fa fa-thumbs-o-down"></i> No</button>
+                </form>
+                    </div>
+    </div>
+    <a href="http://www.woktron.com/secure/knowledgebase/133/How-to-optimize-Apache-performance.html#" class="btn btn-success btn-block" onclick="window.print();return false"><i class="fa fa-print">&nbsp;</i>Print this Article</a>
+</div>
+    <h3 class="kb-alsoread">
+        Also Read
+    </h3>
+    <div class="kbarticles">
+                    <div>
+                <a href="http://www.woktron.com/secure/knowledgebase/217/Upgrade-or-Downgrade-Information-for-VPS.html">
+                    <i class="glyphicon glyphicon-file"></i> Upgrade / Downgrade Information for VPS
+                </a>
+                <p>If you would like to upgrade or downgrade your service, we have a convenient process to do just...</p>
+            </div>
+                    <div>
+                <a href="http://www.woktron.com/secure/knowledgebase/80/Mounting-Partitions-in-CentOS-5x.html">
+                    <i class="glyphicon glyphicon-file"></i> Mounting Partitions in CentOS 5.x
+                </a>
+                <p>This is a basic security tip that can be executed to help protect your system. This is not an...</p>
+            </div>
+                    <div>
+                <a href="http://www.woktron.com/secure/knowledgebase/215/NcFTP-Guide.html">
+                    <i class="glyphicon glyphicon-file"></i> NcFTP Guide
+                </a>
+                <p>The NcFTP command line FTP client provides an efficient method of using the File Transfer...</p>
+            </div>
+                    <div>
+                <a href="http://www.woktron.com/secure/knowledgebase/216/Additional-IP-addresses.html">
+                    <i class="glyphicon glyphicon-file"></i> Additional IP addresses
+                </a>
+                <p>To order extra IP addresses for your Reseller Web Hosting Account, Virtual Private Server or...</p>
+            </div>
+                    <div>
+                <a href="http://www.woktron.com/secure/knowledgebase/196/How-to-recover-from-a-broken-RAID-array-with-MDADM.html">
+                    <i class="glyphicon glyphicon-file"></i> How to recover from a broken RAID array with MDADM
+                </a>
+                <p>This article will attempt to guide you to determine if a MDADM based raid array (in our case a...</p>
+            </div>
+            </div>
+
+
+
+        </div><!-- /.main-content -->
+                    <div class="col-md-3 pull-md-left sidebar">
+                    <div menuitemname="Support Knowledgebase Tag Cloud" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-cloud"></i>&nbsp;                Tag Cloud
+                            </h3>
+        </div>
+                    <div class="panel-body">
+                <a href="http://www.woktron.com/secure/knowledgebase.php?tag=installation" style="font-size:24px;">installation</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=centos" style="font-size:24px;">centos</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=directadmin" style="font-size:20px;">directadmin</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=security" style="font-size:20px;">security</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=virtual+private+servers" style="font-size:20px;">virtual private servers</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=dedicated+servers" style="font-size:20px;">dedicated servers</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=e-mail" style="font-size:20px;">e-mail</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=ip+addresses" style="font-size:12px;">ip addresses</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=spamassasin" style="font-size:12px;">spamassasin</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=csf+firewall" style="font-size:12px;">csf firewall</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=linux+malware+detect" style="font-size:12px;">linux malware detect</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=control+panel" style="font-size:12px;">control panel</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=maldet" style="font-size:12px;">maldet</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=mount" style="font-size:12px;">mount</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=ftp" style="font-size:12px;">ftp</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=antivirus" style="font-size:12px;">antivirus</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=rootkit+hunter" style="font-size:12px;">rootkit hunter</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=network" style="font-size:12px;">network</a>
+<a href="http://www.woktron.com/secure/knowledgebase.php?tag=clamav" style="font-size:12px;">clamav</a>
+
+            </div>
+                            </div>
+        <div menuitemname="Support" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-support"></i>&nbsp;                Support
+                            </h3>
+        </div>
+                            <div class="list-group">
+                                                            <a menuitemname="Support Tickets" href="http://www.woktron.com/secure/supporttickets.php" class="list-group-item" id="Secondary_Sidebar-Support-Support_Tickets">
+                            <i class="fa fa-ticket fa-fw"></i>&nbsp;                            My Support Tickets
+                                                    </a>
+                                                                                <a menuitemname="Announcements" href="http://www.woktron.com/secure/announcements.php" class="list-group-item" id="Secondary_Sidebar-Support-Announcements">
+                            <i class="fa fa-list fa-fw"></i>&nbsp;                            Announcements
+                                                    </a>
+                                                                                <a menuitemname="Knowledgebase" href="http://www.woktron.com/secure/knowledgebase.php" class="list-group-item active" id="Secondary_Sidebar-Support-Knowledgebase">
+                            <i class="fa fa-info-circle fa-fw"></i>&nbsp;                            Knowledgebase
+                                                    </a>
+                                                                                <a menuitemname="Downloads" href="http://www.woktron.com/secure/downloads.php" class="list-group-item" id="Secondary_Sidebar-Support-Downloads">
+                            <i class="fa fa-download fa-fw"></i>&nbsp;                            Downloads
+                                                    </a>
+                                                                                <a menuitemname="Network Status" href="http://www.woktron.com/secure/serverstatus.php" class="list-group-item" id="Secondary_Sidebar-Support-Network_Status">
+                            <i class="fa fa-rocket fa-fw"></i>&nbsp;                            Network Status
+                                                    </a>
+                                                                                <a menuitemname="Open Ticket" href="http://www.woktron.com/secure/submitticket.php" class="list-group-item" id="Secondary_Sidebar-Support-Open_Ticket">
+                            <i class="fa fa-comments fa-fw"></i>&nbsp;                            Open Ticket
+                                                    </a>
+                                                </div>
+                    </div>
+        <div menuitemname="social-media" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-thumbs-up"></i>&nbsp;                Social Media
+                            </h3>
+        </div>
+                            <div class="list-group">
+                                                            <a menuitemname="facebook-link" href="https://facebook.com/woktron" class="list-group-item" id="Secondary_Sidebar-social-media-facebook-link">
+                            <i class="fa fa-facebook"></i>&nbsp;                            Like us on Facebook!
+                                                    </a>
+                                                                                <a menuitemname="twitter-link" href="https://twitter.com/woktron" class="list-group-item" id="Secondary_Sidebar-social-media-twitter-link">
+                            <i class="fa fa-twitter"></i>&nbsp;                            Follow us on Twitter!
+                                                    </a>
+                                                                                <a menuitemname="google-plus-link" href="https://plus.google.com/+woktron" class="list-group-item" id="Secondary_Sidebar-social-media-google-plus-link">
+                            <i class="fa fa-google-plus"></i>&nbsp;                            Add us to your circles!
+                                                    </a>
+                                                </div>
+                    </div>
+    
+            </div>
+            </div>
+    <div class="clearfix"></div>
+</section>
+
+<footer id="rt-footer-surround">
+			<div class="rt-footer-surround-pattern">
+				<div class="rt-container">
+										<div id="rt-bottom">
+						<div class="rt-grid-12 rt-alpha rt-omega">
+     			            <div class="rt-block fp-bottom rt-big-title rt-title-center">
+           	<div class="module-surround">
+	           				<div class="module-title">
+					<h2 class="title"><span>Have any questions ?</span></h2>			</div>
+	                		                	<div class="module-content">
+	                		
+
+<div class="customfp-bottom rt-big-title rt-title-center">
+	<center><span class="rt-title-tag">Check out our <a href="http://www.woktron.com/secure/knowledgebase.php">knowledgebase</a> or contact our sales department</span></center><br>&nbsp;</div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+						<div class="clear"></div>
+					</div>
+															<div id="rt-footer">
+						<div class="rt-grid-3 rt-alpha">
+     			            <div class="rt-block title4">
+           	<div class="module-surround">
+	           				<div class="module-title">
+					<h2 class="title"><span>Hosting</span></h2>			</div>
+	                		                	<div class="module-content">
+	                		
+
+<div class="customtitle4">
+			<p class="nomarginbottom"><a href="http://www.woktron.com/products/webhosting">Web Hosting</a></p>
+		<p class="nomarginbottom"><a href="http://www.woktron.com/products/enterprise-hosting">Enterprise Hosting</a></p>
+		<p class="nomarginbottom"><a href="http://www.woktron.com/products/reseller-hosting">Reseller Hosting</a></p>
+                <p class="nomarginbottom"><a href="http://www.woktron.com/products/vps">KVM VPS<em>Semi-Dedicated</em></a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/secure/knowledgebase/133/domainchecker.php?language=English&amp;currency=1">Domain Names</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/products/ssl-certificates">SSL Certificates</a></p></div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+<div class="rt-grid-3">
+     			            <div class="rt-block title4">
+           	<div class="module-surround">
+	           				<div class="module-title">
+					<h2 class="title"><span>Dedicated</span></h2>			</div>
+	                		                	<div class="module-content">
+	                		
+
+<div class="customtitle4">
+	<p class="nomarginbottom"><a href="http://www.woktron.com/products/netherlands">Netherlands</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/products/france">France</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/products/united-states">United States</a></p><div class="title4"><h2 class="title">Services</h2></div>
+<p class="nomarginbottom"><a href="http://www.woktron.com/products/server-management/">Server Management</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/products/webdesign">Web Design</a></p>
+
+</div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+<div class="rt-grid-3">
+     			            <div class="rt-block title4">
+           	<div class="module-surround">
+	           				<div class="module-title">
+					<h2 class="title"><span>ABOUT</span></h2>			</div>
+	                		                	<div class="module-content">
+	                		
+
+<div class="customtitle4">
+			<p class="nomarginbottom"><a href="http://www.woktron.com/about/blog">Blog</a></p>
+		<p class="nomarginbottom"><a href="http://www.woktron.com/about/datacenters">Data Centers</a></p>
+		<p class="nomarginbottom"><a href="http://www.woktron.com/about">Mission Statement</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/about/partners">Partners</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/about/service-level-agreement-sla">Service Level Agreement</a></p></div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+<div class="rt-grid-3 rt-omega">
+     			            <div class="rt-block title4">
+           	<div class="module-surround">
+	           				<div class="module-title">
+					<h2 class="title"><span>Support<span class="hidden-tablet"> Center</span></span></h2>			</div>
+	               		                	<div class="module-content">
+	                		
+
+<div class="customtitle4"><p class="nomarginbottom"><a href="http://www.woktron.com/secure/clientarea.php?language=English">Client Login</a></p><p class="nomarginbottom"><a href="http://www.woktron.com/secure/knowledgebase.php?language=English">Knowledgebase</a></p><p class="nomarginbottom"><a href="http://www.woktron.com/secure/networkissues.php?language=English">Netwerk Status</a></p><p class="nomarginbottom"><a href="http://www.woktron.com/support/terms-of-service">Terms of Service</a></p>
+<p class="nomarginbottom"><a href="http://www.woktron.com/support/privacy-policy">Privacy Policy</a></p>
+                <p class="nomarginbottom"><a href="http://www.woktron.com/support/contact">Contact</a></p>
+				                <p class="nomarginbottom"></p><div id="livezilla_tracking" style="display:none"><script async="" type="text/javascript" src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/server.php"></script></div><script type="text/javascript">
+var script = document.createElement("script");script.async=true;script.type="text/javascript";var src = "https://www.woktron.com/support/server.php?a=8b051&rqst=track&output=jcrpt&fbpos=10&fbml=0&fbmt=0&fbmr=0&fbmb=0&fbw=32&fbh=112&nse="+Math.random();setTimeout("script.src=src;document.getElementById('livezilla_tracking').appendChild(script)",1);</script><noscript>&lt;img src="https://www.woktron.com/support/server.php?a=8b051&amp;amp;rqst=track&amp;amp;output=nojcrpt" width="0" height="0" style="visibility:hidden;" alt=""&gt;</noscript><div style="display:none;"><a href="javascript:void(window.open(&#39;https://www.woktron.com/support/chat.php?a=9679f&#39;,&#39;&#39;,&#39;width=590,height=760,left=0,top=0,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes&#39;))" class="lz_fl"><img id="chat_button_image" src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/image.php" width="32" height="112" style="border:0px;" alt="Woktron Live Chat"></a></div><p></p>
+				</div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+						<div class="clear"></div>
+					</div>
+															<div id="rt-copyright">
+						<div class="rt-container">
+							<div class="rt-grid-5 rt-alpha">
+    	<div class="clear"></div>
+	<div class="rt-block">
+		<small>Copyright © 2015 Woktron Hosting. All rights reserved.</small>	</div>
+	
+</div>
+<div class="rt-grid-5">
+    		<div class="rt-social-buttons rt-block">
+						<a class="social-button rt-social-button-1" href="http://www.facebook.com/woktron" target="_blank">
+				<span class="fa fa-facebook"></span>
+									<span class="social-button-text">Facebook</span>
+							</a>
+			
+						<a class="social-button rt-social-button-2" href="https://twitter.com/woktron" target="_blank">
+				<span class="fa fa-twitter"></span>
+									<span class="social-button-text">Twitter</span>
+							</a>
+			
+						<a class="social-button rt-social-button-3" href="https://plus.google.com/+woktron" target="_blank">
+				<span class="fa fa-google-plus"></span>
+									<span class="social-button-text">Google +</span>
+							</a>
+			
+			
+			
+																		
+
+			<div class="clear"></div>
+		</div>
+		
+</div>
+<div class="rt-grid-2 rt-omega">
+     			            <div class="rt-block ">
+           	<div class="module-surround">
+	           		                	<div class="module-content">
+	                		<div class="mod-languages">
+
+	<ul class="lang-inline">
+	        
+                    <li class="lang-active" dir="ltr">
+                                    <a href="http://www.woktron.com/secure/knowledgebase.php?language=English">
+                                                    <img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/en.gif" alt="English (UK)" title="English (UK)">                                            </a>
+                            </li>
+	        
+                    <li class="" dir="ltr">
+                                    <a href="http://www.woktron.com/secure/knowledgebase.php?language=Dutch">
+                                                    <img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/nl.gif" alt="Nederlands (NL)" title="Nederlands (NL)">                                            </a>
+                            </li>
+							
+							                    <li class="" dir="ltr">
+                                    <a href="http://www.woktron.com/secure/knowledgebase.php?language=fran%C3%A7ais">
+                                                    <img src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/fr.gif" alt="Français (FR)" title="Français (FR)">                                            </a>
+                            </li>
+		</ul>
+
+</div>
+	                	</div>
+                	</div>
+           </div>
+	
+</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+									</div>
+			</div>
+		</footer>
+
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/bootstrap.min.js.descarga"></script>
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/jquery-ui.min.js.descarga"></script>
+<script type="text/javascript">
+    vvar csrfToken = '1d1556eee835d1ae3cec287f1d601a81ac860505',
+        markdownGuide = 'Markdown Guide',
+        locale = 'en_GB',
+        saved = 'saved',
+        saving = 'autosaving';
+</script>
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/whmcs.js.descarga"></script>
+<script src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/AjaxModal.js.descarga"></script>
+
+<div class="modal system-modal fade" id="modalAjax" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel panel-primary">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">Title</h4>
+            </div>
+            <div class="modal-body panel-body">
+                Loading...
+            </div>
+            <div class="modal-footer panel-footer">
+                <div class="pull-left loader">
+                    <i class="fa fa-circle-o-notch fa-spin"></i> Loading...
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary modal-submit">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//www.woktron.com/stats/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript>&lt;p&gt;&lt;img src="//www.woktron.com/stats/piwik.php?idsite=1" style="border:0;" alt="" /&gt;&lt;/p&gt;</noscript>
+<!-- End Piwik Code -->
+
+
+
+
+</div><div id="lz_floating_button" style="position: fixed; height: 112px; width: 32px; overflow: hidden; z-index: 99996; cursor: move; margin: 0px; opacity: 1.1; bottom: auto; right: auto; left: 0px; top: 236px;"><a href="javascript:void(window.open(&#39;https://www.woktron.com/support/chat.php?a=9679f&#39;,&#39;&#39;,&#39;width=590,height=760,left=0,top=0,resizable=yes,menubar=no,location=no,status=yes,scrollbars=yes&#39;))" class="lz_fl"><img id="chat_button_image" src="./How to optimize Apache performance - Knowledgebase - Woktron Web Hosting_files/image.php" width="32" height="112" style="border:0px;" alt="Woktron Live Chat"></a></div></body></html>

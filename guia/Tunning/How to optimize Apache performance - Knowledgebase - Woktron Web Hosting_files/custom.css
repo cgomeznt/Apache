@@ -1,0 +1,25 @@
+/* *****************************************************
+
+    ** Custom Stylesheet **
+
+    Any custom styling you want to apply should be
+    defined here.
+
+***************************************************** */
+
+/* change link font color */
+
+a {
+    color: #666465;
+}
+
+a:hover, a:active {
+    color: #DC6D29;
+	text-decoration: none;
+}
+
+
+/* change size knowledgebase */
+blockquote {
+    font-size: 13px;
+}

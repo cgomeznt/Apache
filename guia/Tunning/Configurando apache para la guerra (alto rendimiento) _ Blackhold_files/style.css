@@ -1,0 +1,254 @@
+/*
+Theme Name: H5
+Theme URI: http://diggingintowordpress.com/
+Description: A minimalist WordPress template theme built with HTML 5.
+Version: 1.0
+Author: Jeff Starr
+Author URI: http://perishablepress.com/
+Tags: minimalist, template, html5
+
+	H5 v1.0
+	http://diggingintowordpress.com/
+
+	This theme was lovingly designed and developed by Jeff Starr, 
+	who blogs at perishablepress.com and designs at monzilla.biz.
+
+	The CSS, HTML and design is released under GPL:
+	http://www.opensource.org/licenses/gpl-3.0.html
+*/
+
+/* == BASICS == */
+
+footer, nav, nav2, article, aside {
+	display: block;
+        background: #fff;
+        font-family: 'sans';
+        font-size: 10px;
+	}
+
+
+header {
+	display: block;
+        background: #fafafa;
+        /* font-family: 'sans-serif'; */
+	font-family: 'sans';
+        font-size: 10px;
+        padding: 5px;
+	}
+
+nav a:link, nav a:visited {
+	text-decoration: none;
+        color: #fff;
+}
+
+nav a:link, nav2 a:visited {
+	text-decoration: none;
+        color: #000;
+}
+
+section {
+	display: block;
+        background: #fafafa;
+        font-family: 'sans';
+        font-size: 14px;
+        padding: 5px;
+	}
+body {
+	margin: 0 auto;
+	/* width: 790px; */
+	width: 790px;
+        background: #000;
+	}
+nav+section, nav2+section {
+	overflow: hidden;
+	/* width: 530px; */
+	width: 530px;
+	float: left;
+	clear: none;
+        padding-top: 10px;
+	}
+
+
+/* == LINKS == */
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #AA0000;
+	}
+a:hover, a:active {
+	text-decoration: none;
+	color: #000000;
+	}
+
+/* == HEADER == */
+
+body>header {
+	background: #111;
+	padding: 44px;
+	color: #ccc;
+        background: url("http://blackhold.nusepas.com/wp-content/themes/H5/images/headhtml5.jpg"); 
+	}
+body>header h1 {
+	margin: 0;
+        font-size: 22px;
+}
+
+body>header h1 a:link, body>header h1 a:visited {
+	text-decoration: none;
+        color: #fff;
+}
+
+body>header h1 a:hover, body>header h1 a:active {
+	text-decoration: none;
+        color: #fff;
+}
+
+/* == POSTS == */
+article[id*=post-] {
+        padding-top: 5px;
+        padding-left: 5px;
+        padding-bottom: 5px;
+        padding-right: 5px;
+        margin: 5px;
+	}
+article>header p, 
+article>footer p {
+	font-style: italic;
+	}
+article+nav, article+nav2 {
+	font-weight: bold;
+	}
+section>h1 {
+	padding-top: 0px;
+	}
+
+section>pre {
+	font-size: 1em;
+	padding: 1em;
+	border: 1px dashed #aa0000;
+	color: #000;
+	background-color: #FFFFDB;
+	line-height: 1.1em;
+	overflow: auto;
+        overflow-y: hidden;
+}
+
+body>header h1 a:link, body>header h1 a:visited {
+			text-decoration: none;
+                        color: #fff;
+			}
+
+/* == NAVIGATION == */
+
+nav, nav2 {
+	text-align: center;
+	clear: both;
+	}
+body>nav, body>nav2 {
+	background: #aa0000;
+        padding: 5px 0;
+	}
+	body>nav ul, body>nav2 ul {
+		text-align: right;
+		margin: 5px;
+		}
+		body>nav li, body>nav2 li {
+			margin-right: 5px;
+			font-weight: bold;
+			display: inline;
+			}
+         body>nav a:link {
+                 color: #fff;
+                 }
+         body>nav2 a:link {
+                 color: #AA0000;
+                 }
+
+         body>nav a:hover, body>nav a:active, body>nav2 a:hover, body>nav2 a:active {
+                 color: #000;
+                 }
+
+         article>header h1 a:link, article>header h1 a:visited {
+		text-decoration: none;
+                color: #000;
+	 }
+	 article>header h1 a:hover, article>header h1 a:active {
+		text-decoration: none;
+                color: #AA0000;
+	 }
+
+/* == COMMENTS == */
+
+article[id*=comment-] {
+	margin: 15px 0;
+	padding: 10px;
+	}
+	article[id*=comment-] h4 {
+		margin: 0;
+		}
+	.alt {
+		border: 1px solid #ddd;
+		background: #eee;
+		}
+form[method=post] label {
+	display: block;
+	}
+form[method=post] input {
+	margin: 2px 0 12px 0;
+	display: block;
+	}
+
+/* == SIDEBAR == */
+
+aside {
+	margin-top: 10px;
+	/* width: 240px; */
+        width: 240px;
+	overflow: hidden;
+	float: right;
+	clear: none;
+        background: #eee;
+	}
+	aside li {
+		list-style: none;
+                margin-right: 5px;
+		}
+		aside li ul li {
+			list-style: disc outside;
+			}
+
+/* == FOOTER == */
+
+body>footer {
+	padding-top: 1px;
+	text-align: center;
+	overflow: hidden;
+	width: 100%;
+	clear: both;
+	}
+
+/* == SEARCH == */
+
+label[for=s] {
+	display: none;
+	}
+
+/* == ELEMENTS == */
+
+/* a place for misc. styles */
+
+h5 {
+     color: #fff;
+     font-weight: normal;
+     font-size: 9px;
+     text-align: center;
+}
+
+.fixme {
+	text-align: right;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+}
+
+/* == ALL YOUR CODE ARE BELONG TO POETRY == */
