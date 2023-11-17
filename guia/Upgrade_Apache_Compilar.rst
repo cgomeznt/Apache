@@ -17,7 +17,7 @@ Lo descargamos y lo descomprimimos::
 	tar -xvzf httpd-2.4.58.tar.gz
 	cd httpd-2.4.58
 	
-Copiamos del apache que queremos hacer el updete el archivo "config.nice" en el directorio donde descargamos la nueva versión.
+Copiamos del apache que queremos hacer el updete el archivo "config.nice" en el directorio donde descargamos la nueva versión::
 
 	cp /opt/apache2/2.4.28/build/config.nice /root/httpd-2.4.58/
 
