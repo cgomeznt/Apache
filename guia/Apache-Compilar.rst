@@ -141,13 +141,3 @@ Listo hasta aquí, si abre un navegador vera el mensaje::
 	
 	It works!
 	
-
-	 
-
-	
-	
-	
-	
-export http_proxy=http://10.132.0.10:8080 \
-export https_proxy=http://10.132.0.10:8080 \
-export fttp_proxy=http://10.132.0.10:8080
