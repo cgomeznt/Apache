@@ -19,12 +19,13 @@
 * [Algunos ejemplos de Virtual Host](guia/Ejemplos_VirtualHost.rst)
 * [Convertid formato rst to HTML](guia/rsttohtml.rst)
 * [Run Apache non-root](guia/non-root.rst)
-* [Un Autofirmado con OpenSSL](guia/OpensslAutofirmado.rst)
 * [WAF - Mod_security](guia/mod_security.rst)
 * [WAF - Mod_security Debian 11](guia/Modsecurity_Debian11_completo.rst)
 * [WAF - corregir un false positive](guia/falsepositive.rst)
 * [WAF - Paginacion ](guia/Paginacion_del_Mod_Security.txt)
 * [ab - Apache HTTP server benchmarking tool](guia/ab.rst)
+* [Certificado Autofirmado con OpenSSL](guia/OpensslAutofirmado.rst)
+* [Certificado Autofirmado con OpenSSL varios Nombres Alternativos](guia/OpensslAutofirmado_name_alternativos.rst.rst)
 
 
 
