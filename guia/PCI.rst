@@ -14,8 +14,8 @@ https://docs.microfocus.com/SM/9.60/Hybrid/Content/security/concepts/support_of_
 
 # Hacer el redireccionamiento
 <VirtualHost *:80>
-   ServerName glpiqa.credicard.com.ve
-   Redirect / https://glpiqa.credicard.com.ve
+   ServerName glpiqa.local.com.ve
+   Redirect / https://glpiqa.local.com.ve
 
 </VirtualHost>
 
@@ -24,7 +24,7 @@ https://docs.microfocus.com/SM/9.60/Hybrid/Content/security/concepts/support_of_
         Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
         Header always append X-Frame-Options SAMEORIGIN
         ServerAdmin webmaster@localhost
-        ServerName glpiqa.credicard.com.ve
+        ServerName glpiqa.local.com.ve
         DocumentRoot /var/www/html/glpi
         SSLEngine on
         SSLCertificateFile /etc/pki/tls/glpi/cert.crt
